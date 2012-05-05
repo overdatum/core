@@ -33,4 +33,9 @@
 |
 */
 
-return array();
+return array(
+	'layla' => array(
+		'auto' => true,
+		'location' => 'layla/application'
+	)
+);
