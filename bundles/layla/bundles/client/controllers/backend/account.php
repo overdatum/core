@@ -5,7 +5,7 @@
 */
 class Layla_Account_Controller extends Layla_Base_Controller
 {
-	
+
 	/**
 	 * __construct
 	 *
