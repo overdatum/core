@@ -1,4 +1,4 @@
-<?php namespace DBManager\Drivers;
+<?php namespace DBManager\Drivers; use Laravel\Database as DB; use Laravel\Config as Config; use PDO;
 
 class Driver {
 
@@ -7,44 +7,35 @@ class Driver {
 	 *
 	 * @var array
 	 **/
-	private $ignore = array(
-		'laravel_migrations',
-		'layouts',
-		'modules',
-		'roles',
-		'users',
-		'regions',
-		'region_module',
-		'sessions'
-	);
+	protected $no_access;
 
 	/**
 	 * PDO var
 	 *
 	 * @var
 	 **/
-	private $pdo;
+	protected $pdo;
 
 	/**
 	 * The table we are working on
 	 *
 	 * @var string
 	 **/
-	public $table;
+	protected $table;
 
 	/**
 	 * Table info for the table we are working on
 	 *
 	 * @var object
 	 **/
-	public $table_info;
+	protected $table_info;
 
 	/**
 	 * Tables
 	 *
 	 * @var array
 	 **/
-	public $tables = array();
+	protected $tables = array();
 
 	/**
 	 * __construct
@@ -53,20 +44,28 @@ class Driver {
 	 */
 	public function __construct()
 	{
-		$this->pdo = DB::connection()->pdo;
+		$this->no_access = Config::get('layla::dbmanager.ignore');
+		$this->pdo    = DB::connection()->pdo;
 	}
 
 	/**
-	 * Set
-	 *
-	 * @param string|array $field
-	 * @param string|array $property
-	 * @param string|array $value
-	 * @return DBManager
+	 * table
+	 * 
+	 * @param string $name The table name we are on
+	 * @return static
 	 */
-	public function set($field, $property, $value)
+	public static function table($table)
 	{
-		return $this;
+		$dbm = new static;
+
+		if(in_array($table, $dbm->no_access))
+		{
+			throw new \Exception("Not allowed");	
+		}
+
+		$dbm->table = $table;
+
+		return $dbm;
 	}
 
 	/**

@@ -1,55 +1,30 @@
-<?php namespace DBManager\Drivers;
+<?php namespace DBManager\Drivers; use Laravel\Config as Config;
 
 class MySQL extends Driver {
 
 	/**
-	 * tables
+	 * __construct
 	 *
-	 * @param string $name The table name we want more info from
-	 * @return DBManager
+	 * @return void
 	 */
-	public static function table($table)
+	public function __construct()
 	{
-		$dbm = new static;
-		$dbm->table = $table;
-		return $dbm;
+		parent::__construct();
 	}
 
 	/**
 	 * Return all tables we're allowed to use
 	 *
 	 * @return array
+	 * // pgsql:  $query_string = "SELECT tablename FROM pg_tables WHERE tablename !~ '^pg_+' AND tableowner = '" . $connection['username'] ."'";
 	 */
 	public static function tables()
 	{
 		$dbm = new static;
-
-		$connection_string = Config::get('database.default');
-		$connection = Config::get('database.connections.' . $connection_string);
-		switch($connection['driver'])
+		$sql = "SHOW TABLES";
+		foreach($dbm->pdo->query($sql)->fetchAll(\PDO::FETCH_NUM) as $table)
 		{
-			case 'pgsql':
-				$query_string = "SELECT tablename FROM pg_tables WHERE tablename !~ '^pg_+' AND tableowner = '" . $connection['username'] ."'";
-			break;
-			case 'mysql':
-				$query_string = "SHOW TABLES";
-			break;
-		}
-
-		foreach($dbm->pdo->query($query_string)->fetchAll(PDO::FETCH_NUM) as $table)
-		{
-			$ignore = false;
-			$table = $table[0];
-
-			foreach ($dbm->ignore as $start)
-			{
-				if(starts_with($table, $start))
-				{
-					$ignore = true;
-				}
-			}
-
-			if( ! $ignore)
+			if( ! in_array($table[0], $dbm->no_access))
 			{
 				$dbm->tables[] = $table;
 			}
@@ -68,36 +43,49 @@ class MySQL extends Driver {
 	{
 		if(is_null($this->table))
 		{
-			throw new Exception("No table set", 30);
+			throw new \Exception("No table set");
 		}
+
+		$table = $this->table;
 
 		try
 		{
-			$table = $this->table;
-			$sql = "SELECT column_name FROM `information_schema.columns` WHERE table_name = `$table`";
-			$column_info = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-			var_dump($column_info); die;
-			foreach($column_info as $column)
-			{
-				$field = $column['field'];
-				unset($column['field']);
+			$sql = "SHOW FULL COLUMNS FROM `$table`";
+			$column_info = $this->pdo->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
 
-				$this->table_info[$table][$field] = $column;
-			}
+			$this->table_info = $column_info;
 
-			return $this->table_info[$table];
 		}
-		catch (PDOException $e)
+		catch (\Exception $e)
 		{
-			switch ($e->errorInfo[1]) {
-				case 1146:
-				default:
-					$status = 20;
-					break;
-			}
+			throw new \Exception($e->errorInfo[2]);
 		}
 
-		return array('status_code' => $status);
+		return $this->table_info;
+
+	}
+
+	/**
+	 * Set
+	 *
+	 * @param string|array $field
+	 * @param string|array $property
+	 * @param string|array $value
+	 * @return DBManager
+	 */
+	public function set($field, $properties)
+	{
+		return $this;
+	}
+
+	/**
+	 * new_table
+	 *
+	 * @return void
+	 */
+	public static function new_table($table)
+	{
+		return $this;
 	}
 
 }

@@ -1,4 +1,4 @@
-<?php namespace Laravel; defined('DS') or die('No direct script access.');
+<?php defined('DS') or die('No direct script access.');
 
 class DBManager {
 
