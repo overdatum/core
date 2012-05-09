@@ -1,5 +1,5 @@
 <?php
 
-class Media extends Model {
+class Media extends Eloquent {
 	
 }

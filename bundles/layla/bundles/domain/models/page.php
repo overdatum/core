@@ -1,5 +1,5 @@
 <?php
 
-class Page extends Model {
+class Page extends Eloquent {
 	
 }
