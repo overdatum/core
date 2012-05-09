@@ -34,8 +34,14 @@
 */
 
 return array(
+
 	'layla' => array(
 		'auto' => true,
 		'location' => 'layla/application'
-	)
+	),
+
+	'docs' => array(
+		'handles' => 'docs'
+	),
+
 );

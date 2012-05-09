@@ -25,7 +25,7 @@ class Layla_Client_Auth_Controller extends Layla_Base_Controller {
 			}
 		}
 
-		return Redirect::to($this->url.'auth/login')->with('errors', $validator->errors);
+		return Redirect::to($this->url.'auth/login')->with('errors', $validator->errors)->with_input('except', array());
 	}
 
 	public function get_logout()
