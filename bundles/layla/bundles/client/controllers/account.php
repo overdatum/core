@@ -55,11 +55,6 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 
 	public function get_add()
 	{
-		if(Authority::cannot('create', 'Account'))
-		{
-			return Redirect::to('backend/accounts');
-		}
-
 		// Get Roles and put it in a nice array for the dropdown
 		$roles = array('' => '') + model_array_pluck(API::get(array('role', 'all'))->get()->results, function($role) { 
 			return $role->lang->name;
@@ -77,11 +72,6 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 
 	public function post_add()
 	{
-		if(Authority::cannot('create', 'Account'))
-		{
-			return Redirect::to('backend/accounts');
-		}
-
 		$response = API::post(array('account'), Input::all());
 		// Error were found our data! Redirect to form with errors and old input
 		if($response->error())
@@ -105,11 +95,6 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 
 	public function get_edit($uuid = null)
 	{
-		if(Authority::cannot('update', 'Account', $uuid))
-		{
-			return Redirect::to('backend/accounts');
-		}
-
 		// Get the Account
 		$response = API::get(array('account', $uuid));
 
@@ -148,11 +133,6 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 
 	public function put_edit($uuid = null)
 	{
-		if(Authority::cannot('update', 'Account', $uuid))
-		{
-			return Redirect::to('backend/accounts');
-		}
-
 		// Update the Account
 		$response = API::put(array('account', $uuid), Input::all());
 
@@ -178,11 +158,6 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 
 	public function get_delete($uuid = null)
 	{
-		if(Authority::cannot('delete', 'Account', $uuid))
-		{
-			return Redirect::to('backend/accounts');
-		}
-
 		// Get the Account
 		$response = API::get(array('account', $uuid));
 
@@ -201,11 +176,6 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 
 	public function put_delete($uuid = null)
 	{
-		if(Authority::cannot('delete', 'Account', $uuid))
-		{
-			return Redirect::to('backend/accounts');
-		}
-
 		// Delete the Account
 		$response = API::delete(array('account', $uuid));
 

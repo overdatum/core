@@ -31,12 +31,12 @@ foreach ($bundles as $bundle => $config)
 // Authority Filter
 // --------------------------------------------------------------
 $login_url = Bundle::get('layla_client.handles') . '/auth/login';
-Route::filter('authority', function($resource) use ($login_url)
+Route::filter('authority', function($resource, $redirect = null) use ($login_url)
 {
 	$action = Request::$route->parameters['0'];
 	if(Authority::cannot($action, $resource))
 	{
-		return Redirect::to($login_url);
+		return Redirect::to(is_null($redirect) ? $login_url : $redirect);
 	}
 });
 
@@ -46,4 +46,19 @@ Route::filter('authority', function($resource) use ($login_url)
 Route::filter('auth', function() use ($login_url)
 {
 	if (Auth::guest()) return Redirect::to($login_url);
+});
+
+// --------------------------------------------------------------
+// Default Composer
+// --------------------------------------------------------------
+View::composer('layla::layouts.default', function($view)
+{
+	$view->shares('url', Config::get('layla::application.url').'/');
+
+	Asset::container('header')->add('jquery', 'js/jquery.min.js')
+		->add('bootstrap', 'css/bootstrap.min.css')
+		->add('bootstrap-responsive', 'css/bootstrap-responsive.css')
+		->add('main', 'css/main.css');
+
+	Asset::container('footer')->add('bootstrap', 'js/bootstrap.js');
 });
