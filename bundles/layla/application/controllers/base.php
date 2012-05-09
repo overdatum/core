@@ -20,6 +20,13 @@ class Layla_Base_Controller extends Controller
 	public $restful = true;
 
 	/**
+	 * Invoke layout method
+	 * 
+	 * @var bool
+	 */
+	public $layout = true;
+
+	/**
 	 * __construct
 	 *
 	 * @return void
@@ -27,6 +34,19 @@ class Layla_Base_Controller extends Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->url = Config::get('layla::application.url').'/';
+	}
+
+	/**
+	 * layout
+	 * 
+	 * @return View
+	 */
+	public function layout()
+	{
+		$this->layout = View::make('layla::layouts.default')->with('meta_title', $this->meta_title);
+		return $this->layout;
 	}
 
 	/**
