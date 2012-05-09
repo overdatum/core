@@ -9,6 +9,29 @@ class Layla_add_Tables {
 	 */
 	public function up()
 	{
+		Schema::create('accounts', function($table)
+		{
+			$table->increments('id');
+			$table->integer('language_id');
+			$table->string('email');
+			$table->string('password');
+			$table->string('name');
+			$table->timestamps();
+		});
+
+		Schema::create('roles', function($table)
+		{
+			$table->increments('id');
+			$table->string('name');
+		});
+
+		Schema::create('account_role', function($table)
+		{
+			$table->increments('id');
+			$table->integer('account_id');
+			$table->integer('role_id');
+		});
+
 		Schema::create('pages', function($table)
 		{
 			$table->increments('id');
@@ -16,10 +39,18 @@ class Layla_add_Tables {
 			$table->timestamps();
 		});
 
-		Schema::create('layouts', function($table)
+		Schema::create('page_lang', function($table)
 		{
 			$table->increments('id');
-			$table->integer('template_id');
+			$table->integer('page_id');
+			$table->integer('language_id');
+			$table->integer('active');
+			$table->timestamps();
+		});
+
+		Schema::create('templates', function($table)
+		{
+			$table->increments('id');
 			$table->timestamps();
 		});
 
@@ -44,6 +75,12 @@ class Layla_add_Tables {
 			$table->increments('id');
 			$table->integer('name');
 		});
+
+		Schema::create('languages', function($table)
+		{
+			$table->increments('id');
+			$table->integer('name');
+		});
 	}
 
 	/**
@@ -53,11 +90,16 @@ class Layla_add_Tables {
 	 */
 	public function down()
 	{
+		Schema::drop('accounts');
+		Schema::drop('roles');
+		Schema::drop('account_role');
 		Schema::drop('pages');
+		Schema::drop('page_lang');
 		Schema::drop('layouts');
 		Schema::drop('regions');
 		Schema::drop('region_module');
 		Schema::drop('modules');
+		Schema::drop('languages');
 	}
 
 }
