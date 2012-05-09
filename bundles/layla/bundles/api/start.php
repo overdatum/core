@@ -19,3 +19,4 @@ foreach ($bundles as $bundle => $config)
 require __DIR__.DS.'routes'.DS.'account'.EXT;
 require __DIR__.DS.'routes'.DS.'media'.EXT;
 require __DIR__.DS.'routes'.DS.'page'.EXT;
+require __DIR__.DS.'routes'.DS.'dbmanager'.EXT;
