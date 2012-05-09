@@ -174,7 +174,7 @@ class Form extends \Laravel\Form {
 	public static function submit($value, $attributes = array())
 	{
 		$attributes['type'] = 'submit';
-		$attributes['class'] .= ' btn';
+		$attributes['class'] = array_key_exists('class', $attributes) ? $attributes['class'] . ' btn' : 'btn';
 
 		return static::button($value, $attributes);
 	}
@@ -189,7 +189,7 @@ class Form extends \Laravel\Form {
 	public static function reset($value, $attributes = array())
 	{
 		$attributes['type'] = 'reset';
-		$attributes['class'] .= ' btn';
+		$attributes['class'] = array_key_exists('class', $attributes) ? $attributes['class'] . ' btn' : 'btn';
 		return static::button($value, $attributes);
 	}
 
