@@ -1,185 +1,74 @@
-<?php
+<?php namespace Laravel; defined('DS') or die('No direct script access.');
 
-/**
- * 
- * Error codes:
- *  10 = Success
- *  20 = Table doesn't exist
- *  30 = No table set
- *  40 = No tables found
- */
-class DBManager
-{
+class DBManager {
 
 	/**
-	 * These tables will be ignored because they are system tables
+	 * All of the active DBManager drivers.
 	 *
 	 * @var array
-	 **/
-	private $ignore = array(
-		'laravel_migrations',
-		'layouts',
-		'modules',
-		'roles',
-		'users',
-		'regions',
-		'region_module',
-		'sessions'
-	);
-
-	/**
-	 * PDO var
-	 *
-	 * @var
-	 **/
-	private $pdo;
-
-	/**
-	 * The table we are working on
-	 *
-	 * @var string
-	 **/
-	public $table;
-
-	/**
-	 * Table info for the table we are working on
-	 *
-	 * @var object
-	 **/
-	public $table_info;
-
-	/**
-	 * Tables
-	 *
-	 * @var array
-	 **/
-	public $tables = array();
-
-	/**
-	 * __construct
-	 *
-	 * @return void
 	 */
-	public function __construct()
-	{
-		$this->pdo = DB::connection('mysql')->pdo;
-	}
+	public static $drivers = array();
 
 	/**
-	 * tables
+	 * Get a DBManager driver instance.
 	 *
-	 * @param string $name The table name we want more info from
-	 * @return DBManager
-	 */
-	public static function table($table)
-	{
-		$dbm = new static;
-		$dbm->table = $table;
-		return $dbm;
-	}
-
-	/**
-	 * Return all tables we're allowed to use
+	 * If no driver name is specified, the default will be returned.
 	 *
-	 * @return array
+	 * <code>
+	 *		// Get the default DBManager driver instance
+	 *		$driver = DBManager::driver();
+	 *
+	 *		// Get a specific DBManager driver instance by name
+	 *		$driver = DBManager::driver('mysql');
+	 * </code>
+	 *
+	 * @param  string        $driver
+	 * @return DBManager\Drivers\Driver
 	 */
-	public static function tables()
+	public static function driver($driver = null)
 	{
-		$dbm = new static;
+		if (is_null($driver)) $driver = Config::get('database.connections.'.Config::get('database.default').'.driver');
 
-		foreach($dbm->pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_NUM) as $table)
+		if ( ! isset(static::$drivers[$driver]))
 		{
-			$ignore = false;
-			$table = $table[0];
-
-			foreach ($dbm->ignore as $start)
-			{
-				if(starts_with($table, $start))
-				{
-					$ignore = true;
-				}
-			}
-
-			if( ! $ignore)
-			{
-				$dbm->tables[] = $table;
-			}
+			static::$drivers[$driver] = static::factory($driver);
 		}
 
-		return $dbm->tables;
+		return static::$drivers[$driver];
 	}
 
 	/**
-	 * Get all column info from the specified table
+	 * Create a new DBManager driver instance.
 	 *
-	 * @param string $table
-	 * @return array
+	 * @param  string  $driver
+	 * @return DBManager\Drivers\Driver
 	 */
-	public function info($table = null)
+	protected static function factory($driver)
 	{
-		if( ! is_null($table))
+		switch ($driver)
 		{
-			$this->table = $table;
+			case 'mysql':
+				return new DBManager\Drivers\MySQL;
+
+			case 'pgsql':
+				return new DBManager\Drivers\Postgres;
+
+			default:
+				throw new \Exception("DBManager driver {$driver} is not supported.");
 		}
-		if( ! empty($this->table))
-		{
-			try
-			{
-				$table = $this->table;
-				$sql = "SHOW FULL COLUMNS FROM `$table`";
-				$column_info = $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-				foreach($column_info as $column)
-				{
-					$field = $column['field'];
-					unset($column['field']);
-
-					$this->table_info[$table][$field] = $column;
-				}
-
-				return $this->table_info[$table];
-			}
-			catch (PDOException $e)
-			{
-				switch ($e->errorInfo[1]) {
-					case 1146:
-					default:
-						$status = 20;
-						break;
-				}
-			}
-
-		}
-		else
-		{
-			$status = 30;
-		}
-
-		return array('status_code' => $status);
-
 	}
 
 	/**
-	 * Set
+	 * Magic Method for calling the methods on the default DBManager driver.
 	 *
-	 * @param string|array $field
-	 * @param string|array $property
-	 * @param string|array $value
-	 * @return DBManager
+	 * <code>
+	 *		// Call the "tables" method on the default DBManager driver
+	 *		$name = DBManager::tables();
+	 * </code>
 	 */
-	public function set($field, $property, $value)
+	public static function __callStatic($method, $parameters)
 	{
-		return $this;
-	}
-
-	/**
-	 * __toString
-	 *
-	 * @return array
-	 */
-	public function __toString()
-	{
-		return $this->tables;
+		return call_user_func_array(array(static::driver(), $method), $parameters);
 	}
 
 }
