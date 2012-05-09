@@ -3,7 +3,7 @@
 /**
 * 
 */
-class Layla_Media_Controller extends Layla_Base_Controller
+class Layla_Client_Page_Controller extends Layla_Base_Controller
 {
 	
 	/**
