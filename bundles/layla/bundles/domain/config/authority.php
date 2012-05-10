@@ -16,7 +16,7 @@ return array(
         Authority::action_alias('manage', array('create', 'read', 'update', 'delete'));
         Authority::action_alias('moderate', array('update', 'delete'));
 
-        if(isset($account->roles) && count($account->roles) === 0) return false;
+        if(Auth::guest() || count($account->roles) === 0) return false;
     }
 
 );
