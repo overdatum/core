@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\Messages;
+
 /**
 * 
 */
@@ -57,12 +59,12 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 		// Get Roles and put it in a nice array for the dropdown
 		$roles = array('' => '') + model_array_pluck(API::get(array('role', 'all'))->get()->results, function($role) { 
 			return $role->lang->name;
-		}, 'uuid');
+		}, 'id');
 
 		// Get Languages and put it in a nice array for the dropdown
 		$languages = model_array_pluck(API::get(array('language', 'all'))->get()->results, function($language) {
 			return $language->name;
-		}, 'uuid');
+		}, 'id');
 
 		$this->layout->content = View::make('layla_client::accounts.add')
 									 ->with('roles', $roles)
@@ -78,7 +80,7 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 			// Errors were found on our data! Redirect to form with errors and old input
 			if($response->code == 400)
 			{
-				return Redirect::to('backend/accounts/add')
+				return Redirect::to($this->url.'account/add')
 							 ->with('errors', new Messages($response->get()))
 					   ->with_input('except', array('password'));
 			}
@@ -89,13 +91,13 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 		// Add success notification
 		Notification::success('Successfully created account');
 
-		return Redirect::to('backend/accounts');
+		return Redirect::to($this->url.'account');
 	}
 
-	public function get_edit($uuid = null)
+	public function get_edit($id = null)
 	{
 		// Get the Account
-		$response = API::get(array('account', $uuid));
+		$response = API::get(array('account', $id));
 
 		// Handle response codes other than 200 OK
 		if($response->error())
@@ -109,19 +111,19 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 		// Get Roles and put it in a nice array for the dropdown
 		$roles = array('' => '') + model_array_pluck(API::get(array('role', 'all'))->get()->results, function($role) {
 			return $role->lang->name;
-		}, 'uuid');
+		}, 'id');
 
 		// Get the Roles that belong to a User and put it in a nice array for the dropdown
 		$active_roles = array();
 		if(isset($account->roles))
 		{ 
-			$active_roles = model_array_pluck($account->roles, 'uuid', '');
+			$active_roles = model_array_pluck($account->roles, 'id', '');
 		}
 
 		// Get Languages and put it in a nice array for the dropdown
 		$languages = model_array_pluck(API::get(array('language', 'all'))->get()->results, function($language) {
 			return $language->name;
-		}, 'uuid');
+		}, 'id');
 
 		$this->layout->content = View::make('layla_client::accounts.edit')
 									 ->with('account', $account)
@@ -130,10 +132,10 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
  									 ->with('languages', $languages);
 	}
 
-	public function put_edit($uuid = null)
+	public function put_edit($id = null)
 	{
 		// Update the Account
-		$response = API::put(array('account', $uuid), Input::all());
+		$response = API::put(array('account', $id), Input::all());
 
 		// Handle response codes other than 200 OK
 		if($response->error())
@@ -141,7 +143,7 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 			// Errors were found on our data! Redirect to form with errors and old input
 			if($response->code == 400)
 			{
-				return Redirect::to('backend/accounts/edit/' . $uuid)
+				return Redirect::to($this->url.'account/edit/' . $id)
 							 ->with('errors', new Messages($response->get()))
 					   ->with_input('except', array('password'));
 			}
@@ -152,13 +154,13 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 		// Add success notification
 		Notification::success('Successfully updated account');
 
-		return Redirect::to('backend/accounts');
+		return Redirect::to($this->url.'account');
 	}
 
-	public function get_delete($uuid = null)
+	public function get_delete($id = null)
 	{
 		// Get the Account
-		$response = API::get(array('account', $uuid));
+		$response = API::get(array('account', $id));
 
 		// Handle response codes other than 200 OK
 		if($response->error())
@@ -173,10 +175,10 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 									 ->with('account', $account);
 	}
 
-	public function put_delete($uuid = null)
+	public function put_delete($id = null)
 	{
 		// Delete the Account
-		$response = API::delete(array('account', $uuid));
+		$response = API::delete(array('account', $id));
 
 		// Handle response codes other than 200 OK
 		if($response->error())
@@ -187,7 +189,7 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 		// Add success notification
 		Notification::success('Successfully deleted account');
 
-		return Redirect::to('backend/accounts');
+		return Redirect::to($this->url.'account');
 	}
 
 }
