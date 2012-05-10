@@ -1,6 +1,6 @@
-<?php namespace Layla\API\Drivers;
+<?php namespace Layla\Client\API\Drivers;
 
-use Layla\APIResponse;
+use Layla\Client\APIResponse;
 
 use Laravel\Config;
 use Exception;

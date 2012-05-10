@@ -1,4 +1,4 @@
-<?php namespace Layla\API\Drivers;
+<?php namespace Layla\Client\API\Drivers;
 
 abstract class Driver {
 

@@ -20,7 +20,7 @@ Route::controller(array(
 // Load namespaces
 // --------------------------------------------------------------
 Autoloader::namespaces(array(
-	'Layla' => __DIR__.DS.'libraries'
+	'Layla\\Client' => __DIR__.DS.'libraries'
 ));
 
 // --------------------------------------------------------------
@@ -54,6 +54,6 @@ View::composer('layla_client::layouts.default', function($view)
 // --------------------------------------------------------------
 // Set Aliases
 // --------------------------------------------------------------
-Autoloader::alias('Layla\\API', 'API');
-Autoloader::alias('Layla\\Notification', 'Notification');
-Autoloader::alias('Layla\\HTML', 'HTML');
+Autoloader::alias('Layla\\Client\\API', 'API');
+Autoloader::alias('Layla\\Client\\Notification', 'Notification');
+Autoloader::alias('Layla\\Client\\HTML', 'HTML');

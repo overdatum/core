@@ -1,4 +1,4 @@
-<?php namespace Layla;
+<?php namespace Layla\Client;
 
 use Laravel\Config;
 
