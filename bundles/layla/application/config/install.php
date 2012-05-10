@@ -10,13 +10,15 @@ return array(
 	*/
 
 	'api' => array(
-		
 		'driver' => 'directly',
-		
-		'url' => ''
-
+		'url' => 'http://layla.local'
 	),
 
-	'url' => 'manage'
+	'url' => 'manage',
+
+	'start' => array(
+		'client',
+		'domain'
+	)
 
 );

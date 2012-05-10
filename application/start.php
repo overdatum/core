@@ -171,3 +171,9 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 {
 	Session::load();
 }
+
+Bundle::register('layla', array(
+	'location' => 'layla/application'
+));
+
+Bundle::start('layla');
