@@ -38,7 +38,7 @@ Route::get('api/role/all', function() {
 		}
 	}
 
-	$total = $roles->count();
+	$total = (int) $roles->count();
 
 	// Add order_by, skip & take to our results query
 	$roles = $roles->order_by($options['sort_by'], $options['order'])->skip($options['offset'])->take($options['limit'])->get();

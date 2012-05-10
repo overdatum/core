@@ -38,7 +38,7 @@ Route::get('api/account/all', function() {
 		}
 	}
 
-	$total = $accounts->count();
+	$total = (int) $accounts->count();
 
 	// Add order_by, skip & take to our results query
 	$accounts = $accounts->order_by($options['sort_by'], $options['order'])->skip($options['offset'])->take($options['limit'])->get();

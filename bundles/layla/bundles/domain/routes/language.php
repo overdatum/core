@@ -38,7 +38,7 @@ Route::get('api/language/all', function() {
 		}
 	}
 
-	$total = $languages->count();
+	$total = (int) $languages->count();
 
 	// Add order_by, skip & take to our results query
 	$languages = $languages->order_by($options['sort_by'], $options['order'])->skip($options['offset'])->take($options['limit'])->get();

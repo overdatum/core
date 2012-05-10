@@ -28,18 +28,20 @@ Route::filter('authority', function($resource)
 	$action = Request::$route->parameters['0'];
 	if(Authority::cannot($action, $resource))
 	{
-		return Response::error(401);
+		return Response::make('', 401);
 	}
 });
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::error(401);
+	if (Auth::guest()) return Redirect::make('', 401);
 });
 
+// --------------------------------------------------------------
+// Setting system tables
+// --------------------------------------------------------------
 DBManager::$hidden = Config::get('layla_domain::dbmanager.hidden');
 
-dd(DBManager::info('page_lang'));
 // --------------------------------------------------------------
 // Load Routes
 // --------------------------------------------------------------
