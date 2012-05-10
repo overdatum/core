@@ -1,7 +1,8 @@
 <?php
 
 return array(
-	'ignore' => array(
+
+	'hidden' => array(
 		'account_role',
 		'accounts',
 		'languages',
@@ -15,4 +16,5 @@ return array(
 		'region_module',
 		'sessions'
 	)
+
 );

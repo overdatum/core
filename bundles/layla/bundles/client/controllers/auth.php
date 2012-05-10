@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\Messages;
+
 class Layla_Client_Auth_Controller extends Layla_Base_Controller {
 
 	public $meta_title = 'Authentication';
@@ -11,21 +13,11 @@ class Layla_Client_Auth_Controller extends Layla_Base_Controller {
 
 	public function put_login()
 	{
-		$rules = array(
-			'email' => 'required|email',
-			'password' => 'required',
-		);
-
-		$validator = new Validator(Input::all(), $rules);
-		if ($validator->valid())
+		$auth = API::post(array('auth', 'login'), Input::all());
+		if($auth->code == 400)
 		{
-			if (Auth::attempt(Input::get('email'), Input::get('password')))
-			{
-				return Redirect::to($this->url.'accounts');
-			}
+			return Redirect::to($this->url.'auth/login')->with('errors', new Messages($auth->get()))->with_input('except', array());
 		}
-
-		return Redirect::to($this->url.'auth/login')->with('errors', $validator->errors)->with_input('except', array());
 	}
 
 	public function get_logout()

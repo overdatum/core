@@ -95,7 +95,7 @@ class Layla_add_Tables {
 		Schema::drop('account_role');
 		Schema::drop('pages');
 		Schema::drop('page_lang');
-		Schema::drop('layouts');
+		Schema::drop('templates');
 		Schema::drop('regions');
 		Schema::drop('region_module');
 		Schema::drop('modules');
