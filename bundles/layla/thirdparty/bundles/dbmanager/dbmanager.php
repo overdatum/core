@@ -10,6 +10,13 @@ class DBManager {
 	public static $drivers = array();
 
 	/**
+	 * The tables that should be hidden
+	 * 
+	 * @var array
+	 */
+	public static $hidden = array();
+
+	/**
 	 * Get a DBManager driver instance.
 	 *
 	 * If no driver name is specified, the default will be returned.

@@ -1,13 +1,14 @@
-<?php namespace DBManager\Drivers; use Laravel\Database as DB; use Laravel\Config as Config; use PDO;
+<?php namespace DBManager\Drivers;
+
+use Exception;
+
+use Laravel\Database as DB;
+use Laravel\Config;
+use PDO;
+
+use DBManager;
 
 class Driver {
-
-	/**
-	 * These tables will be ignored because they are system tables
-	 *
-	 * @var array
-	 **/
-	protected $no_access;
 
 	/**
 	 * PDO var
@@ -44,8 +45,8 @@ class Driver {
 	 */
 	public function __construct()
 	{
-		$this->no_access = Config::get('layla::dbmanager.ignore');
-		$this->pdo    = DB::connection()->pdo;
+		$this->pdo = DB::connection()->pdo;
+		$this->config = Config::get('database.connections.'.Config::get('database.default'));
 	}
 
 	/**
@@ -58,9 +59,9 @@ class Driver {
 	{
 		$dbm = new static;
 
-		if(in_array($table, $dbm->no_access))
+		if(in_array($table, DBManager::$hidden))
 		{
-			throw new \Exception("Not allowed");	
+			throw new Exception("Not allowed");	
 		}
 
 		$dbm->table = $table;

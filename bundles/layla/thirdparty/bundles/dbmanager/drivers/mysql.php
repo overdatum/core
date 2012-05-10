@@ -1,4 +1,8 @@
-<?php namespace DBManager\Drivers; use Laravel\Config as Config;
+<?php namespace DBManager\Drivers; 
+
+use Laravel\Config;
+use Exception;
+use PDO;
 
 class MySQL extends Driver {
 
@@ -20,17 +24,15 @@ class MySQL extends Driver {
 	 */
 	public static function tables()
 	{
-		$dbm = new static;
-		$sql = "SHOW TABLES";
-		foreach($dbm->pdo->query($sql)->fetchAll(\PDO::FETCH_NUM) as $table)
+		foreach($this->pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_NUM) as $table)
 		{
-			if( ! in_array($table[0], $dbm->no_access))
+			if( ! in_array($table[0], $this->no_access))
 			{
-				$dbm->tables[] = $table;
+				$this->tables[] = $table[0];
 			}
 		}
 
-		return $dbm->tables;
+		return $this->tables;
 	}
 
 	/**
@@ -39,26 +41,20 @@ class MySQL extends Driver {
 	 * @param string $table
 	 * @return array
 	 */
-	public function info()
+	public function info($table = null)
 	{
-		if(is_null($this->table))
+		if(is_null($table))
 		{
-			throw new \Exception("No table set");
+			throw new Exception("No table set");
 		}
-
-		$table = $this->table;
 
 		try
 		{
-			$sql = "SHOW FULL COLUMNS FROM `$table`";
-			$column_info = $this->pdo->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
-
-			$this->table_info = $column_info;
-
+			$this->table_info = $this->pdo->query("SHOW FULL COLUMNS FROM `$table`")->fetchAll(PDO::FETCH_ASSOC);
 		}
-		catch (\Exception $e)
+		catch (Exception $e)
 		{
-			throw new \Exception($e->errorInfo[2]);
+			throw new Exception($e->errorInfo[2]);
 		}
 
 		return $this->table_info;
