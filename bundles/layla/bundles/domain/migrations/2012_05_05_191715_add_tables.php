@@ -1,6 +1,6 @@
 <?php
 
-class Layla_add_Tables {
+class Layla_Domain_Add_Tables {
 
 	/**
 	 * Make changes to the database.
@@ -30,6 +30,7 @@ class Layla_add_Tables {
 			$table->increments('id');
 			$table->integer('account_id');
 			$table->integer('role_id');
+			$table->timestamps();
 		});
 
 		Schema::create('pages', function($table)
