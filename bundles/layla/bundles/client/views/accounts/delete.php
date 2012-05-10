@@ -5,7 +5,7 @@
 	<div class="well">
 		You are about to delete the account for "<?= $account->name . ' ('.$account->email.')' ?>". <b>If you do, there is no turning back!</b>
 	</div>
-	<?= Form::open('backend/accounts/delete/'.$account->uuid, 'PUT') ?>
-		<?= Form::actions(array(Form::submit('Delete account', array('class' => 'btn large danger')), ' &nbsp; '.HTML::link('admin/accounts', 'Nope, I changed my mind', array('class' => 'btn large')))) ?>
+	<?= Form::open($url.'account/delete/'.$account->id, 'PUT') ?>
+		<?= Form::actions(array(Form::submit('Delete account', array('class' => 'btn btn-large btn-danger')), ' &nbsp; '.HTML::link($url.'account', 'Nope, I changed my mind', array('class' => 'btn btn-large')))) ?>
 	<?= Form::close() ?>
 </div>

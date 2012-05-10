@@ -1,9 +1,9 @@
 <div id="main">
 	<div class="page-header">
 		<div class="pull-right">
-			<?= Form::open('backend/accounts', 'GET') ?>
+			<?= Form::open($url.'account', 'GET') ?>
 				<?= Form::input('text', 'q', Input::get('q')) ?> &nbsp;
-				<button type="submit" class="btn-small btn-primary"><i class="icon-white search">&nbsp;</i></button>
+				<button type="submit" class="btn btn-small btn-primary"><i class="icon-white icon-search">&nbsp;</i></button>
 			<?= Form::close() ?>
 		</div>
 		<h1>Accounts</h1>
@@ -15,8 +15,8 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th><?= HTML::sort_link('backend/accounts', 'name', 'Name') ?></th>
-					<th><?= HTML::sort_link('backend/accounts', 'email', 'Email') ?></th>
+					<th><?= HTML::sort_link($url.'account', 'name', 'Name') ?></th>
+					<th><?= HTML::sort_link($url.'account', 'email', 'Email') ?></th>
 					<th>Roles</th>
 					<th>&nbsp;</th>
 				</tr>
@@ -41,9 +41,9 @@
 						}
 						?>
 					</td>
-					<td width="120" style="text-align:right">
-						<?= HTML::link('backend/accounts/edit/'.$account->id, '<i class="icon pencil"></i>', array('class' => 'btn-small')) ?>
-						<?php echo Authority::can('delete', 'Account', $account) ? '&nbsp; '.HTML::link('backend/accounts/delete/'.$account->id, 'Delete', array('class' => 'btn-danger')) : ''; ?>
+					<td style="text-align:right">
+						<?= HTML::link($url.'account/edit/'.$account->id, '<i class="icon-pencil"></i>', array('class' => 'btn btn-small')) ?>
+						<?= HTML::link($url.'account/delete/'.$account->id, '<i class="icon-trash icon-white"></i>', array('class' => 'btn btn-danger')) ?>
 					</td>
 				</tr>
 			<?php endforeach ?>
@@ -58,6 +58,6 @@
 		</div>
 	<?php endif ?>
 	<div class="pull-right">
-		<?= HTML::link('backend/accounts/add', 'Add account', array('class' => 'btn-large btn-primary')) ?>
+		<?= HTML::link($url.'account/add', '<i class="icon-white icon-plus-sign"></i> Add account', array('class' => 'btn btn-large btn-primary')) ?>
 	</div>
 </div>
