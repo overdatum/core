@@ -21,6 +21,13 @@ Autoloader::directories(array(
 ));
 
 // --------------------------------------------------------------
+// Load namespaces
+// --------------------------------------------------------------
+Autoloader::namespaces(array(
+	'Layla\\Domain' => __DIR__.DS.'libraries',
+));
+
+// --------------------------------------------------------------
 // Filters
 // --------------------------------------------------------------
 Route::filter('authority', function($resource)
@@ -41,6 +48,11 @@ Route::filter('auth', function()
 // Setting system tables
 // --------------------------------------------------------------
 DBManager::$hidden = Config::get('layla_domain::dbmanager.hidden');
+
+// --------------------------------------------------------------
+// Set Aliases
+// --------------------------------------------------------------
+Autoloader::alias('Layla\\Domain\\Model', 'Eloquent');
 
 // --------------------------------------------------------------
 // Load Routes

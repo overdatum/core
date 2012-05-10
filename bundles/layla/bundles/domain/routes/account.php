@@ -81,13 +81,13 @@ Route::post('api/account', function() {
 	$account = new Account(Input::all());
 
 	// Remove empty keys (multiple's first option)
-	$role_ids = array_filter(array_flip(Input::get('role_ids')), 'strlen');
+	$role_ids = Input::has('role_ids') ? array_filter(array_flip(Input::get('role_ids')), 'strlen') : array();
 
 	// Sync the roles (attach & detach the appropiate ones)
 	$account->roles()->sync($role_ids);
 
 	// Try to save
-	if( ! $account->save())
+	if($account->save() === false)
 	{
 		// Return 400 response with errors
 		return Response::json((array) $account->errors->messages, 400);
@@ -119,13 +119,13 @@ Route::put('api/account/(:num)', function($id) {
 	$account->fill(Input::all());
 
 	// Remove empty keys (multiple's first option)
-	$role_ids = array_filter(array_flip(Input::get('role_ids')), 'strlen');
+	$role_ids = Input::has('role_ids') ? array_filter(array_flip(Input::get('role_ids')), 'strlen') : array();
 
 	// Sync the roles (attach & detach the appropiate ones)
 	$account->roles()->sync($role_ids);
 
 	// Try to save
-	if( ! $account->save())
+	if($account->save() === false)
 	{
 		return Response::json((array) $account->errors->messages, 400);
 	}

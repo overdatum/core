@@ -80,7 +80,7 @@ class Layla_Domain_Add_Tables {
 		Schema::create('languages', function($table)
 		{
 			$table->increments('id');
-			$table->integer('name');
+			$table->string('name');
 		});
 	}
 
