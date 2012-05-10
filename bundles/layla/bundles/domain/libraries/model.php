@@ -13,22 +13,6 @@ class Model extends Laravel_Model {
 	public static $rules;
 
 	/**
-	 * Update a model instance in the database.
-	 *
-	 * @param  mixed  $id
-	 * @param  array  $attributes
-	 * @return int
-	 */
-	public static function update($id, $attributes)
-	{
-		$model = new static(array(), true);
-
-		if (static::$timestamps) $attributes['updated_at'] = new \DateTime;
-
-		return $model->query()->where($model->key(), '=', $id)->update($attributes);
-	}
-
-	/**
 	 * Save the model instance to the database.
 	 *
 	 * @return bool
