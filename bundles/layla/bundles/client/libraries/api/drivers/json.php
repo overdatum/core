@@ -1,5 +1,7 @@
 <?php namespace Layla\API\Drivers;
 
+use Layla\APIResponse;
+
 use Laravel\Config;
 use Exception;
 
@@ -35,7 +37,13 @@ class JSON extends Driver {
 		$body = curl_exec($ch);
 		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-		return new APIResponse($code, json_decode($body));
+		$content = '';
+		if(in_array($code, array(200, 400)))
+		{
+			$content = $body;
+		}
+
+		return new APIResponse($code, json_decode($content));
 	}
 
 }
