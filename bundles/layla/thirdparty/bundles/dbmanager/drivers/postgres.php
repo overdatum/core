@@ -52,10 +52,15 @@ class Postgres extends Driver {
 
 		try
 		{
-			$columns = $this->pdo->query("SELECT column_name FROM information_schema.columns WHERE table_name = '$table'")->fetchAll(PDO::FETCH_ASSOC);
-			
+			$columns = $this->pdo->query("SELECT * FROM information_schema.columns WHERE table_name = '$table'")->fetchAll(PDO::FETCH_ASSOC);
 			foreach ($columns as $column) {
-				$this->table_info[] = $column['column_name'];
+				$this->table_info[] = array(
+					'name' => $column['column_name'],
+					'type' => $column['data_type'],
+					'nullable' => $column['is_nullable'] == 'NO' ? false : true,
+					'default' => $column['column_default'],
+					'size' => $column['data_type'] == 'integer' ? $column['numeric_precision'] : $column['character_maximum_length']					
+				);					
 			}
 		}
 		catch (Exception $e)
