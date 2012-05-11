@@ -50,6 +50,17 @@ class Driver {
 	}
 
 	/**
+	 * tables
+	 *
+	 * @return void
+	 */
+	public static function tables()
+	{
+		$tables = new static;
+		return $tables->get_tables();
+	}
+
+	/**
 	 * table
 	 * 
 	 * @param string $name The table name we are on

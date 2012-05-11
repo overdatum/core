@@ -1,5 +1,6 @@
 <?php namespace DBManager\Drivers; 
 
+use DBManager;
 use Laravel\Config;
 use Exception;
 use PDO;
@@ -22,11 +23,11 @@ class MySQL extends Driver {
 	 * @return array
 	 * // pgsql:  $query_string = "SELECT tablename FROM pg_tables WHERE tablename !~ '^pg_+' AND tableowner = '" . $connection['username'] ."'";
 	 */
-	public static function tables()
+	public function get_tables()
 	{
 		foreach($this->pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_NUM) as $table)
 		{
-			if( ! in_array($table[0], $this->no_access))
+			if( ! in_array($table[0], DBManager::$hidden))
 			{
 				$this->tables[] = $table[0];
 			}
@@ -38,15 +39,16 @@ class MySQL extends Driver {
 	/**
 	 * Get all column info from the specified table
 	 *
-	 * @param string $table
 	 * @return array
 	 */
-	public function info($table = null)
+	public function info()
 	{
-		if(is_null($table))
+		if(empty($this->table))
 		{
 			throw new Exception("No table set");
 		}
+
+		$table = $this->table;
 
 		try
 		{
