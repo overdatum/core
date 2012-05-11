@@ -60,6 +60,7 @@ Autoloader::alias('Layla\\Domain\\Model', 'Eloquent');
 require __DIR__.DS.'routes'.DS.'account'.EXT;
 require __DIR__.DS.'routes'.DS.'dbmanager'.EXT;
 require __DIR__.DS.'routes'.DS.'language'.EXT;
+require __DIR__.DS.'routes'.DS.'layout'.EXT;
 require __DIR__.DS.'routes'.DS.'media'.EXT;
 require __DIR__.DS.'routes'.DS.'page'.EXT;
 require __DIR__.DS.'routes'.DS.'role'.EXT;
