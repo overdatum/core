@@ -44,7 +44,7 @@ class Layla_Client_Page_Controller extends Layla_Base_Controller
 		// Paginate the Pages
 		$pages = Paginator::make($pages->results, $pages->total, $this->per_page);
 
-		$this->layout->content = View::make('layla_client::pages.index')->with('pages', $pages);
+		$this->layout->content = View::make('layla_client::page.index')->with('pages', $pages);
 	}
 
 	public function get_add()
@@ -89,7 +89,7 @@ class Layla_Client_Page_Controller extends Layla_Base_Controller
 
 	public function get_edit($id = null)
 	{
-		// Get the Account
+		// Get the Page
 		$response = API::get(array('page', $id));
 
 		// Handle response codes other than 200 OK
@@ -98,16 +98,28 @@ class Layla_Client_Page_Controller extends Layla_Base_Controller
 			return Event::first($response->code);
 		}
 
-		// The response body is the Account
-		$account = $response->get();
+		// The response body is the Page
+		$page = $response->get();
+
+		// Get Languages
+		$languages = model_array_pluck(API::get(array('language', 'all'))->get()->results, function($language) {
+			return $language->name;
+		}, 'id');
+
+		// Get Layouts and put it in a nice array for the dropdown
+		$layouts = model_array_pluck(API::get(array('layout', 'all'))->get()->results, function($layout) {
+			return $layout->name;
+		}, 'id');
 
 		$this->layout->content = View::make('layla_client::page.edit')
-									 ->with('page', $page);
+									 ->with('page', $page)
+									 ->with('languages', $languages)
+									 ->with('layouts', $layouts);
 	}
 
 	public function put_edit($id = null)
 	{
-		// Update the Account
+		// Update the Page
 		$response = API::put(array('page', $id), Input::all());
 
 		// Handle response codes other than 200 OK
@@ -132,7 +144,7 @@ class Layla_Client_Page_Controller extends Layla_Base_Controller
 
 	public function get_delete($id = null)
 	{
-		// Get the Account
+		// Get the Page
 		$response = API::get(array('page', $id));
 
 		// Handle response codes other than 200 OK
@@ -141,7 +153,7 @@ class Layla_Client_Page_Controller extends Layla_Base_Controller
 			return Event::first($response->code);
 		}
 
-		// The request body is the Account
+		// The request body is the Page
 		$page = $response->get();
 
 		$this->layout->content = View::make('layla_client::page.delete')
@@ -150,7 +162,7 @@ class Layla_Client_Page_Controller extends Layla_Base_Controller
 
 	public function delete_delete($id = null)
 	{
-		// Delete the Account
+		// Delete the Page
 		$response = API::delete(array('page', $id));
 
 		// Handle response codes other than 200 OK

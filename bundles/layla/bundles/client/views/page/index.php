@@ -25,7 +25,7 @@
 				<?php foreach($pages->results as $page): ?>
 				<tr>
 					<td>
-						<h2><?= $page->meta_title ?></h2>
+						<h2><?= $page->lang->meta_title ?></h2>
 					</td>
 					<td>
 						<?= $page->account->name ?>

@@ -16,7 +16,7 @@ Route::get('api/page/all', function() {
 	$options = array_merge(array(
 		'offset' => 0,
 		'limit' => 20,
-		'sort_by' => 'page.order',
+		'sort_by' => 'order',
 		'order' => 'ASC'
 	), Input::all());
 
@@ -28,7 +28,7 @@ Route::get('api/page/all', function() {
 	}
 
 	// Preparing our query
-	$pages = Page::with(array('account'))->join('page_lang', 'pages.id', '=', 'page_lang.page_id');
+	$pages = Page::with(array('account', 'lang'))->join('page_lang', 'pages.id', '=', 'page_lang.page_id');
 
 	// Add where's to our query
 	if(array_key_exists('search', $options))
@@ -42,7 +42,7 @@ Route::get('api/page/all', function() {
 	$total = (int) $pages->count();
 
 	// Add order_by, skip & take to our results query
-	$pages = $pages->order_by($options['sort_by'], $options['order'])->skip($options['offset'])->take($options['limit'])->get();
+	$pages = $pages->order_by($options['sort_by'], $options['order'])->skip($options['offset'])->take($options['limit'])->get('pages.*');
 
 	$response = array(
 		'results' => to_array($pages),
@@ -57,8 +57,16 @@ Route::get('api/page/all', function() {
 // Get page by id
 // --------------------------------------------------------------
 Route::get('api/page/(:num)', function($id) {
-	//get page data blabla
-	return Response::json($page);
+	// Get the Page
+	$page = Page::with(array('layout', 'lang'))->where_id($id)->first();
+	
+	if(is_null($page))
+	{
+		// Resource not found, return 404
+		return Response::error(404);
+	}
+
+	return Response::eloquent($page);
 });
 
 // --------------------------------------------------------------

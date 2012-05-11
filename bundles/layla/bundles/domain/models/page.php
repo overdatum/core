@@ -2,15 +2,15 @@
 
 class Page extends Eloquent {
 	
-	public function template()
+	public function layout()
 	{
-		return $this->belongs_to('Template');
+		return $this->belongs_to('Layout');
 	}
 
 	public function lang()
 	{
 		//$language_id = Session::get('layla.language');
-		return $this->has_one('Lang');//->where_language_id();
+		return $this->has_one('PageLang');//->where_language_id();
 	}
 
 	public function account()
