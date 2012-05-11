@@ -5,6 +5,9 @@
 */
 class Layla_Base_Controller extends Controller
 {
+
+	public $per_page = 10;
+
 	/**
 	 * Website data
 	 *
