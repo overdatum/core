@@ -3,6 +3,7 @@
 use Exception;
 
 use Laravel\Database as DB;
+use Laravel\Database\Schema;
 use Laravel\Config;
 use PDO;
 
@@ -78,6 +79,46 @@ class Driver {
 		$dbm->table = $table;
 
 		return $dbm;
+	}
+
+	/**
+	 * new_table
+	 *
+	 * @return void
+	 */
+	public static function new_table($input)
+	{
+		foreach ($input as $table => $columns)
+		{
+			Schema::create($table, function($table) use($columns)
+			{
+				if( ! isset($columns['id']))
+				{
+					$table->increments('id');
+				}
+
+				foreach ($columns as $name => $data)
+				{
+					if(isset($data['length']) AND ! is_null($data['length']))
+					{
+						${$name} = $table->{$data['type']}($name, $data['length']);
+					}
+					else
+					{
+						${$name} = $table->{$data['type']}($name);
+					}
+
+					if(isset($data['nullable']) AND $data['nullable'] == true)
+					{
+						${$name}->nullable();
+					}
+				}
+
+				$table->timestamps();
+			});
+		}
+
+		return $this;
 	}
 
 	/**

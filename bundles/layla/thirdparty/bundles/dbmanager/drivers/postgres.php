@@ -80,14 +80,4 @@ class Postgres extends Driver {
 		return $this;
 	}
 
-	/**
-	 * new_table
-	 *
-	 * @return void
-	 */
-	public static function new_table($table)
-	{
-		return $this;
-	}
-
 }
