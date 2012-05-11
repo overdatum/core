@@ -27,7 +27,7 @@ Route::get('api/role/all', function() {
 	}
 
 	// Preparing our query
-	$roles = new Role;
+	$roles = Role::with('lang');
 
 	// Add where's to our query
 	if(array_key_exists('search', $options))
