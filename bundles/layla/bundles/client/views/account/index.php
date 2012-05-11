@@ -6,7 +6,7 @@
 				<button type="submit" class="btn btn-small btn-primary"><i class="icon-white icon-search">&nbsp;</i></button>
 			<?= Form::close() ?>
 		</div>
-		<h1>Accounts</h1>
+		<h1><?= __('layla_client::account.index.title') ?></h1>
 	</div>
 
 	<?php Notification::show() ?>
@@ -15,9 +15,9 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th><?= HTML::sort_link($url.'account', 'name', 'name') ?></th>
-					<th><?= HTML::sort_link($url.'account', 'email', 'email') ?></th>
-					<th>Roles</th>
+					<th><?= HTML::sort_link($url.'account', 'name', __('layla_client::account.index.table.name')) ?></th>
+					<th><?= HTML::sort_link($url.'account', 'email', __('layla_client::account.index.table.email')) ?></th>
+					<th><?= __('layla_client::account.index.table.roles') ?></th>
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
@@ -54,10 +54,10 @@
 		</div>
 	<?php else: ?>
 		<div class="well">
-			Er zijn geen accounts gevonden...
+			<?= __('layla_client::account.index.table.no_results') ?>
 		</div>
 	<?php endif ?>
 	<div class="pull-right">
-		<?= HTML::link($url.'account/add', '<i class="icon-white icon-plus-sign"></i> Add account', array('class' => 'btn btn-large btn-primary')) ?>
+		<?= HTML::link($url.'account/add', '<i class="icon-white icon-plus-sign"></i> '.__('layla_client::account.index.buttons.add'), array('class' => 'btn btn-large btn-primary')) ?>
 	</div>
 </div>
