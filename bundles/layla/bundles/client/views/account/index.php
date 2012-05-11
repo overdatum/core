@@ -15,8 +15,8 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th><?= HTML::sort_link($url.'account', 'name', 'Name') ?></th>
-					<th><?= HTML::sort_link($url.'account', 'email', 'Email') ?></th>
+					<th><?= HTML::sort_link($url.'account', 'name', 'name') ?></th>
+					<th><?= HTML::sort_link($url.'account', 'email', 'email') ?></th>
 					<th>Roles</th>
 					<th>&nbsp;</th>
 				</tr>
