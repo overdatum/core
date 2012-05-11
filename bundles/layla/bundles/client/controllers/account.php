@@ -8,8 +8,6 @@ use Laravel\Messages;
 class Layla_Client_Account_Controller extends Layla_Base_Controller
 {
 
-	public $per_page = 10;
-
 	/**
 	 * __construct
 	 *
@@ -51,7 +49,7 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 		// Paginate the Accounts
 		$accounts = Paginator::make($accounts->results, $accounts->total, $this->per_page);
 
-		$this->layout->content = View::make('layla_client::accounts.index')->with('accounts', $accounts);
+		$this->layout->content = View::make('layla_client::account.index')->with('accounts', $accounts);
 	}
 
 	public function get_add()
@@ -66,7 +64,7 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 			return $language->name;
 		}, 'id');
 
-		$this->layout->content = View::make('layla_client::accounts.add')
+		$this->layout->content = View::make('layla_client::account.add')
 									 ->with('roles', $roles)
 									 ->with('languages', $languages);
 	}
@@ -125,7 +123,7 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 			return $language->name;
 		}, 'id');
 
-		$this->layout->content = View::make('layla_client::accounts.edit')
+		$this->layout->content = View::make('layla_client::account.edit')
 									 ->with('account', $account)
 									 ->with('roles', $roles)
 									 ->with('active_roles', $active_roles)
@@ -171,11 +169,11 @@ class Layla_Client_Account_Controller extends Layla_Base_Controller
 		// The request body is the Account
 		$account = $response->get();
 
-		$this->layout->content = View::make('layla_client::accounts.delete')
+		$this->layout->content = View::make('layla_client::account.delete')
 									 ->with('account', $account);
 	}
 
-	public function put_delete($id = null)
+	public function delete_delete($id = null)
 	{
 		// Delete the Account
 		$response = API::delete(array('account', $id));
