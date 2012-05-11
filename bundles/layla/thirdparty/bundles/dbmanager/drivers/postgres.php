@@ -23,7 +23,7 @@ class Postgres extends Driver {
 	 * @return array
 	 * // pgsql:  $query_string = "SELECT tablename FROM pg_tables WHERE tablename !~ '^pg_+' AND tableowner = '" . $connection['username'] ."'";
 	 */
-	public function tables()
+	public function get_tables()
 	{
 		foreach($this->pdo->query("SELECT tablename FROM pg_tables WHERE tablename !~ '^pg_+' AND tableowner = '" . $this->config['username'] ."'")->fetchAll(PDO::FETCH_NUM) as $table)
 		{
@@ -39,15 +39,16 @@ class Postgres extends Driver {
 	/**
 	 * Get all column info from the specified table
 	 *
-	 * @param string $table
 	 * @return array
 	 */
-	public function info($table)
+	public function info()
 	{
-		if(is_null($table))
+		if(empty($this->table))
 		{
 			throw new Exception("No table set");
 		}
+
+		$table = $this->table;
 
 		try
 		{
@@ -75,16 +76,6 @@ class Postgres extends Driver {
 	 * @return DBManager
 	 */
 	public function set($field, $properties)
-	{
-		return $this;
-	}
-
-	/**
-	 * new_table
-	 *
-	 * @return void
-	 */
-	public static function new_table($table)
 	{
 		return $this;
 	}
