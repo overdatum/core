@@ -9,7 +9,14 @@ use PDO;
 
 use DBManager;
 
-class Driver {
+abstract class Driver {
+
+	/**
+	 * Driver specific hidden tables
+	 *
+	 * @var array
+	 **/
+	public static $driver_hidden = array();
 
 	/**
 	 * PDO var
@@ -28,9 +35,9 @@ class Driver {
 	/**
 	 * Table info for the table we are working on
 	 *
-	 * @var object
+	 * @var array
 	 **/
-	protected $table_info;
+	protected $table_info = array();
 
 	/**
 	 * Tables
@@ -82,9 +89,35 @@ class Driver {
 	}
 
 	/**
-	 * new_table
+	 * Create a new table
+	 * 
+	 * <code>
+	 * // input example
+	 * $input = array(
+	 *   'posts' => array(
+	 *     'title' => array(
+	 *       'type' => 'string',
+	 *       'length' => 100,
+	 *     ),
+	 *   ),
+	 *   // Can add multiple tables at once
+	 *   'post_lang' => array(
+	 *     'name' => array(
+	 *       'type' => 'string',
+	 *     ),
+	 *     'locale' => array(
+	 *       'type' => 'string',
+	 *       'length' => 5,
+	 *     ),
+	 *   ),
+	 * );
+	 * 
+	 * DBManager::new_table($input);
+	 * 
+	 * </code>
 	 *
-	 * @return void
+	 * @param array $input
+	 * @return array
 	 */
 	public static function new_table($input)
 	{
@@ -118,7 +151,7 @@ class Driver {
 			});
 		}
 
-		return $this;
+		return DBManager::tables();
 	}
 
 	/**

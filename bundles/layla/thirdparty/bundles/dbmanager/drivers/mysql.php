@@ -8,24 +8,21 @@ use PDO;
 class MySQL extends Driver {
 
 	/**
-	 * __construct
+	 * Driver specific hidden tables
 	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
+	 * @var array
+	 **/
+	public static $driver_hidden = array();
 
 	/**
 	 * Return all tables we're allowed to use
 	 *
 	 * @return array
-	 * // pgsql:  $query_string = "SELECT tablename FROM pg_tables WHERE tablename !~ '^pg_+' AND tableowner = '" . $connection['username'] ."'";
 	 */
 	public function get_tables()
 	{
-		foreach($this->pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_NUM) as $table)
+		$sql = "SHOW TABLES";
+		foreach($this->pdo->query($sql)->fetchAll(PDO::FETCH_NUM) as $table)
 		{
 			if( ! in_array($table[0], DBManager::$hidden))
 			{
