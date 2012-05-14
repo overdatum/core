@@ -24,8 +24,8 @@ class Layla_Domain_Add_Tables {
 			'email' => 'admin@admin.com',
 			'password' => Hash::make('admin'),
 			'name' => 'Administrator',
-			'created_at' => DB::raw('NOW()'),
-			'updated_at' => DB::raw('NOW()')
+			'created_at' => new \DateTime,
+			'updated_at' => new \DateTime
 		));
 
 		Schema::create('roles', function($table)
@@ -63,8 +63,8 @@ class Layla_Domain_Add_Tables {
 		DB::table('account_role')->insert(array(
 			'account_id' => 1,
 			'role_id' => 1,
-			'created_at' => DB::raw('NOW()'),
-			'updated_at' => DB::raw('NOW()')
+			'created_at' => new \DateTime,
+			'updated_at' => new \DateTime
 		));
 
 		Schema::create('pages', function($table)
@@ -82,8 +82,8 @@ class Layla_Domain_Add_Tables {
 			'account_id' => 1,
 			'type' => 'published',
 			'order' => 1,
-			'created_at' => DB::raw('NOW()'),
-			'updated_at' => DB::raw('NOW()')
+			'created_at' => new \DateTime,
+			'updated_at' => new \DateTime
 		));
 
 		Schema::create('page_lang', function($table)
@@ -116,8 +116,8 @@ class Layla_Domain_Add_Tables {
 				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-			'created_at' => DB::raw('NOW()'),
-			'updated_at' => DB::raw('NOW()')
+			'created_at' => new \DateTime,
+			'updated_at' => new \DateTime
 		));
 
 		Schema::create('regions', function($table)

@@ -60,6 +60,9 @@ class DBManager {
 			case 'pgsql':
 				return new DBManager\Drivers\Postgres;
 
+			case 'sqlite':
+				return new DBManager\Drivers\SQLite;
+
 			default:
 				throw new \Exception("DBManager driver {$driver} is not supported.");
 		}
