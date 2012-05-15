@@ -4,10 +4,12 @@ if [ -z "$1" ]
 then
 	echo "Please provide an environment (for example: ./sync demo)"
 else
+	layla_path="public_html/$1"
+
 	if [ -f "sync" ]
 	then
 		rsync -av ../ layla-transip:"$layla_path"
-		ssh layla-transip "cd $(printf %q "$layla_path")/utils && ./refreshdb"
+		ssh layla-transip "cd $(printf %q "$layla_path")/utils && ./refreshdb $1"
 	else
 	    echo "You cannot execute sync outside of the utils directory"
 	fi	

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-db_name='layla'
+db_name="layla_$1"
 db_password="$(< .passfile)"
-mysql -u root -p$db_password -e "DROP DATABASE $db_name; CREATE DATABASE $db_name;" &>/dev/null
-cd ../ && php artisan migrate:install --env=demo && php artisan migrate --env=demo
+mysql -u layla_db -p$db_password -e "DROP DATABASE $db_name; CREATE DATABASE $db_name;" &>/dev/null
+cd ../ && php artisan migrate:install --env="$1" && php artisan migrate --env="$1"
 #B-B-B-BAD
-chmod -R 0777 storage
+chmod -R 0755 storage
