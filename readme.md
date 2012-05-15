@@ -66,4 +66,4 @@ Roj Vroemen - @Rojtjo
 
 Koen Schmeets - @Vespakoen
 
-[You?](mailto:layla-cms@gmail.com "Say hey!")
+[You?](mailto:we@getlayla.com "Say hey!")
