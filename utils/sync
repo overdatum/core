@@ -1,5 +1,11 @@
 #!/bin/bash
 
 layla_path='/home/server/www/Layla'
-rsync -av ../ layla-demo:"$layla_path"
-ssh layla-demo "cd $(printf %q "$layla_path")/utils && ./refreshdb"
+
+if [ -f "sync" ]
+then
+	rsync -av ../ layla-demo:"$layla_path"
+	ssh layla-demo "cd $(printf %q "$layla_path")/utils && ./refreshdb"
+else
+    echo "You cannot execute sync outside of the utils directory"
+fi

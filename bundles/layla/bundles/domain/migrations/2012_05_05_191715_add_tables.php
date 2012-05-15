@@ -127,11 +127,11 @@ class Layla_Domain_Add_Tables {
 			$table->integer('layout_id');
 		});
 
-		Schema::create('region_module', function($table)
+		Schema::create('module_region', function($table)
 		{
 			$table->increments('id');
-			$table->integer('region_id');
 			$table->integer('module_id');
+			$table->integer('region_id');
 			$table->integer('order');
 			$table->text('settings');
 		});
@@ -163,7 +163,7 @@ class Layla_Domain_Add_Tables {
 		DB::table('layouts')->insert(array(
 			'name' => 'Default',
 			'type' => 'webpage',
-			'content' => '<html><head></head><body></body></html>',
+			'content' => '<html><head></head><body>this is the layout</body></html>',
 		));
 	}
 
@@ -181,7 +181,7 @@ class Layla_Domain_Add_Tables {
 		Schema::drop('pages');
 		Schema::drop('page_lang');
 		Schema::drop('regions');
-		Schema::drop('region_module');
+		Schema::drop('module_region');
 		Schema::drop('modules');
 		Schema::drop('languages');
 		Schema::drop('layouts');

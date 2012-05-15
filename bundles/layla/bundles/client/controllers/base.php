@@ -48,8 +48,8 @@ class Layla_Base_Controller extends Controller
 	 */
 	public function layout()
 	{
-		$this->layout = View::make('layla_client::layouts.default')->with('meta_title', $this->meta_title);
-		return $this->layout;
+		return View::make('layla_client::layouts.default')
+				   ->with('meta_title', $this->meta_title);
 	}
 
 	/**
