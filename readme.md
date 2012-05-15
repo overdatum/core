@@ -53,14 +53,17 @@ More details will follow soon...
 
 ## How?
 
-In the evenings we find peace of mind while working on Layla and are making steady progress already,
+In the evenings we find peace of mind while working on Layla and are making steady progress already.
+
 Although we know the stage of the project is still very young and fragile, we do welcome pull-requests and team members.
-We also setup a Twilio board that includes a roadmap, tasks, ideas etc.
+
+We also setup a [Trello board](https://trello.com/board/layla-development/4fb2c7f48bea67b80900baa0 "Take a look!") that includes the roadmap, ideas etc.
 
 
 ## Who?
 
 Roj Vroemen - @Rojtjo
+
 Koen Schmeets - @Vespakoen
 
 [You?](mailto:layla-cms@gmail.com "Say hey!")
