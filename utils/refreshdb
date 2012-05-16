@@ -1,6 +1,18 @@
 #!/bin/bash
 
-db_name="layla_$1"
+if [ $1 == "api" ]
+then
+	env="demo"
+else
+	env=$1
+fi
+
+db_name="layla_$env"
 db_password="$(< .passfile)"
+
+echo "Refreshing database"
+echo "database=$db_name"
+echo "env=$env"
+
 mysql -u layla_db -p$db_password -e "DROP DATABASE $db_name; CREATE DATABASE $db_name;" &>/dev/null
 cd ../ && php artisan migrate:install --env="$1" && php artisan migrate --env="$1"
