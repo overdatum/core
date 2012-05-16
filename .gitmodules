@@ -7,3 +7,6 @@
 [submodule "bundles/client"]
 	path = bundles/client
 	url = git@github.com:getlayla/client.git
+[submodule "bundles/components"]
+	path = bundles/components
+	url = git@github.com:getlayla/components.git
