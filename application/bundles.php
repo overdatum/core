@@ -40,14 +40,26 @@ return array(
 	),
 
 	'layla_domain' => array(
-		'auto' => true,
-		'location' => 'layla'.DS.'bundles'.DS.'domain' 
+		'location' => 'domain'
 	),
 
-	'layla_client' => array(
+	'layla_admin' => array(
+		'location' => 'admin'
+	),
+
+	'layla_thirdparty_dbmanager' => array(
 		'auto' => true,
-		'location' => 'layla'.DS.'bundles'.DS.'client',
-		'handles' => Config::get('layla.url')
+		'location' => 'components'.DS.'dbmanager'
+	),
+
+	'layla_thirdparty_authority' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'authority'
+	),
+
+	'layla_thirdparty_bootsparks' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'bootsparks'
 	),
 
 );

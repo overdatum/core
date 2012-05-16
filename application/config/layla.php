@@ -17,8 +17,8 @@ return array(
 	'url' => 'manage',
 
 	'start' => array(
-		'admin',
-		'domain'
+		'domain',
+		'admin'
 	)
 
 );
