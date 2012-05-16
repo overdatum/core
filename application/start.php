@@ -180,9 +180,9 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 // --------------------------------------------------------------
 // Start bundles
 // --------------------------------------------------------------
-foreach (Config::get('layla.start') as $bundle)
+foreach (Config::get('layla.start') as $bundle_name)
 {
-	Bundle::start('layla_'.$bundle);
+	Bundle::start('layla_'.$bundle_name);
 }
 
 // --------------------------------------------------------------

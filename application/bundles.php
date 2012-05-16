@@ -44,6 +44,7 @@ return array(
 	),
 
 	'layla_admin' => array(
+		'handles' => 'manage',
 		'location' => 'admin'
 	),
 
