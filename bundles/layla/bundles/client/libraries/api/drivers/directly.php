@@ -20,7 +20,7 @@ class Directly extends Driver {
  			Input::replace($input);
 		}
 
-		$uri = 'api/' . implode('/', $arguments);
+		$uri = implode('/', $arguments);
 
 		$response = Route::forward($method, $uri);
 

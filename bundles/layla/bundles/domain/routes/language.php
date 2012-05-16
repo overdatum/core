@@ -11,7 +11,7 @@
 // --------------------------------------------------------------
 // Get all Languages
 // --------------------------------------------------------------
-Route::get('api/language/all', function() {
+Route::get('language/all', function() {
 	// Overriding default options with the "user-set" ones
 	$options = array_merge(array(
 		'offset' => 0,
@@ -55,7 +55,7 @@ Route::get('api/language/all', function() {
 // --------------------------------------------------------------
 // Get Language by id
 // --------------------------------------------------------------
-Route::get('api/language/(:num)', function($id) {
+Route::get('language/(:num)', function($id) {
 	// Get the language
 	$language = Language::where_id($id)->first();
 	
@@ -71,7 +71,7 @@ Route::get('api/language/(:num)', function($id) {
 // --------------------------------------------------------------
 // Add Language
 // --------------------------------------------------------------
-Route::post('api/language', function() {
+Route::post('language', function() {
 	// Create a new language object
 	$language = new Language(Input::all());
 
@@ -91,7 +91,7 @@ Route::post('api/language', function() {
 // --------------------------------------------------------------
 // Edit Language
 // --------------------------------------------------------------
-Route::put('api/language/(:num)', function($id) {
+Route::put('language/(:num)', function($id) {
 	// Find the language we are updating
 	$language = Language::find($id);
 
@@ -114,7 +114,7 @@ Route::put('api/language/(:num)', function($id) {
 // --------------------------------------------------------------
 // Delete Language
 // --------------------------------------------------------------
-Route::delete('api/language/(:num)', function($id) {
+Route::delete('language/(:num)', function($id) {
 	// Find the language we are updating
 	$language = Language::find($id);
 

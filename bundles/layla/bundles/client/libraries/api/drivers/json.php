@@ -9,8 +9,7 @@ class JSON extends Driver {
 
 	public static function call($method, $arguments, $input = array(), $segments = array())
 	{
-		$url = Config::get('layla_client::install.api.url') . '/api/' . implode('/', $arguments) . (count($segments) > 0 ? '?' . http_build_query($segments) : '');
-
+		$url = Config::get('layla::install.api.url') . '/' . implode('/', $arguments) . (count($segments) > 0 ? '?' . http_build_query($segments) : '');
 		$method = strtoupper($method);
 
 		$headers = array(

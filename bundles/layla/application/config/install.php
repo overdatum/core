@@ -10,8 +10,8 @@ return array(
 	*/
 
 	'api' => array(
-		'driver' => 'directly',
-		'url' => 'http://layla.local'
+		'driver' => 'json',
+		'url' => 'http://api.getlayla.com'
 	),
 
 	'url' => 'manage',

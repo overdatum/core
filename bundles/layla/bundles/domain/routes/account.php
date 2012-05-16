@@ -11,7 +11,7 @@
 // --------------------------------------------------------------
 // Get all Accounts
 // --------------------------------------------------------------
-Route::get('api/account/all', function() {
+Route::get('account/all', function() {
 	// Overriding default options with the "user-set" ones
 	$options = array_merge(array(
 		'offset' => 0,
@@ -55,7 +55,7 @@ Route::get('api/account/all', function() {
 // --------------------------------------------------------------
 // Get Account by id
 // --------------------------------------------------------------
-Route::get('api/account/(:num)', function($id) {
+Route::get('account/(:num)', function($id) {
 	// Get the Account
 	$account = Account::with(array('roles', 'language'))->where_id($id)->first();
 	
@@ -71,7 +71,7 @@ Route::get('api/account/(:num)', function($id) {
 // --------------------------------------------------------------
 // Add Account
 // --------------------------------------------------------------
-Route::post('api/account', function() {
+Route::post('account', function() {
 	// We are adding an account, password is accessible and required
 	Account::$rules['password'] = 'required';
 	Account::$rules['email'] .= '|unique:accounts,email';
@@ -102,7 +102,7 @@ Route::post('api/account', function() {
 // --------------------------------------------------------------
 // Edit Account
 // --------------------------------------------------------------
-Route::put('api/account/(:num)', function($id) {
+Route::put('account/(:num)', function($id) {
 	// Find the account we are updating
 	$account = Account::find($id);
 
@@ -134,7 +134,7 @@ Route::put('api/account/(:num)', function($id) {
 // --------------------------------------------------------------
 // Delete Account
 // --------------------------------------------------------------
-Route::delete('api/account/(:num)', function($id) {
+Route::delete('account/(:num)', function($id) {
 	// Find the account we are updating
 	$account = Account::find($id);
 

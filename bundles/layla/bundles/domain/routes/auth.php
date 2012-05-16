@@ -11,7 +11,7 @@
 // --------------------------------------------------------------
 // Authenticate
 // --------------------------------------------------------------
-Route::post('api/auth/login', function()
+Route::post('auth/login', function()
 {
 	$rules = array(
 		'email' => 'required|email',

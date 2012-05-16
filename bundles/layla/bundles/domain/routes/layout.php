@@ -11,7 +11,7 @@
 // --------------------------------------------------------------
 // Get all Layouts
 // --------------------------------------------------------------
-Route::get('api/layout/all', function() {
+Route::get('layout/all', function() {
 	// Overriding default options with the "user-set" ones
 	$options = array_merge(array(
 		'offset' => 0,
@@ -55,7 +55,7 @@ Route::get('api/layout/all', function() {
 // --------------------------------------------------------------
 // Get Layout by id
 // --------------------------------------------------------------
-Route::get('api/layout/(:num)', function($id) {
+Route::get('layout/(:num)', function($id) {
 	// Get the layout
 	$layout = Layout::where_id($id)->first();
 	
@@ -71,7 +71,7 @@ Route::get('api/layout/(:num)', function($id) {
 // --------------------------------------------------------------
 // Add Layout
 // --------------------------------------------------------------
-Route::post('api/layout', function() {
+Route::post('layout', function() {
 	// Create a new layout object
 	$layout = new Layout(Input::all());
 
@@ -91,7 +91,7 @@ Route::post('api/layout', function() {
 // --------------------------------------------------------------
 // Edit Layout
 // --------------------------------------------------------------
-Route::put('api/layout/(:num)', function($id) {
+Route::put('layout/(:num)', function($id) {
 	// Find the layout we are updating
 	$layout = Layout::find($id);
 
@@ -114,7 +114,7 @@ Route::put('api/layout/(:num)', function($id) {
 // --------------------------------------------------------------
 // Delete Layout
 // --------------------------------------------------------------
-Route::delete('api/layout/(:num)', function($id) {
+Route::delete('layout/(:num)', function($id) {
 	// Find the layout we are updating
 	$layout = Layout::find($id);
 

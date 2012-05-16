@@ -11,7 +11,7 @@
 // --------------------------------------------------------------
 // Get all Roles
 // --------------------------------------------------------------
-Route::get('api/role/all', function() {
+Route::get('role/all', function() {
 	// Overriding default options with the "user-set" ones
 	$options = array_merge(array(
 		'offset' => 0,
@@ -55,7 +55,7 @@ Route::get('api/role/all', function() {
 // --------------------------------------------------------------
 // Get Role by id
 // --------------------------------------------------------------
-Route::get('api/role/(:num)', function($id) {
+Route::get('role/(:num)', function($id) {
 	// Get the role
 	$role = Role::where_id($id)->first();
 	
@@ -71,7 +71,7 @@ Route::get('api/role/(:num)', function($id) {
 // --------------------------------------------------------------
 // Add Role
 // --------------------------------------------------------------
-Route::post('api/role', function() {
+Route::post('role', function() {
 	// Create a new role object
 	$role = new Role(Input::all());
 
@@ -91,7 +91,7 @@ Route::post('api/role', function() {
 // --------------------------------------------------------------
 // Edit Role
 // --------------------------------------------------------------
-Route::put('api/role/(:num)', function($id) {
+Route::put('role/(:num)', function($id) {
 	// Find the role we are updating
 	$role = Role::find($id);
 
@@ -114,7 +114,7 @@ Route::put('api/role/(:num)', function($id) {
 // --------------------------------------------------------------
 // Delete Role
 // --------------------------------------------------------------
-Route::delete('api/role/(:num)', function($id) {
+Route::delete('role/(:num)', function($id) {
 	// Find the role we are updating
 	$role = Role::find($id);
 

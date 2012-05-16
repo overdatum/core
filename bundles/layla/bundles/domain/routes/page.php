@@ -11,7 +11,7 @@
 // --------------------------------------------------------------
 // Get all pages
 // --------------------------------------------------------------
-Route::get('api/page/all', function() {
+Route::get('page/all', function() {
 	// Overriding default options with the "user-set" ones
 	$options = array_merge(array(
 		'offset' => 0,
@@ -56,7 +56,7 @@ Route::get('api/page/all', function() {
 // --------------------------------------------------------------
 // Get page by id
 // --------------------------------------------------------------
-Route::get('api/page/(:num)', function($id) {
+Route::get('page/(:num)', function($id) {
 	// Get the Page
 	$page = Page::with(array('layout', 'lang'))->where_id($id)->first();
 	
@@ -72,13 +72,13 @@ Route::get('api/page/(:num)', function($id) {
 // --------------------------------------------------------------
 // New page
 // --------------------------------------------------------------
-Route::post('api/page', function() {
+Route::post('page', function() {
 	return;
 });
 
 // --------------------------------------------------------------
 // Edit page by id
 // --------------------------------------------------------------
-Route::put('api/page/(:num)', function($id) {
+Route::put('page/(:num)', function($id) {
 	return;
 });
