@@ -29,7 +29,7 @@ Layla consists of the following components
 	*	REST API(JSON over HTTP)
 
 
-*	Client
+*	Admin
 
 	*	Pages
 	*	Layouts
@@ -47,6 +47,16 @@ Layla consists of the following components
 	*	Modules
 		*	WYSIWYG (Redactor.JS)
 		*	Menu
+		*	Simple module builder
+
+*	Components
+	
+	*	Third-party bundles
+	*	Our own bundles to give back to the community
+
+*	Client
+	
+	*	The frontend (building up, caching and presenting the content)
 	
 More details will follow soon...
 
