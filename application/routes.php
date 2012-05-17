@@ -59,8 +59,8 @@ if(Config::get('layla.url') == '(:url)')
 			array(
 				'directly',
 				'',
-				'admin',
-				'',
+				'manage',
+				"domain', 'admin",
 			),
 			$layla_config
 		);
