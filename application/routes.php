@@ -32,10 +32,81 @@
 |
 */
 
-Route::get('/', function()
+if(Config::get('layla.url') == '(:url)')
 {
-	return View::make('home.index');
-});
+	Route::get('(.*)', function()
+	{
+		Bundle::start('layla_thirdparty_bootsparks');
+		return View::make('layouts.default')->with('meta_title', 'Install wizard')->nest('content', 'install.wizard');
+	});
+
+	Route::post('(.*)', function()
+	{
+		// Path to Layla config
+		$layla_config_file = path('app').DS.'config'.DS.'layla'.EXT;
+
+		// Get contents of DB config file
+		$layla_config = File::get($layla_config_file);
+
+		// Apply the changes
+		$layla_config = str_replace(
+			array(
+				'(:api.driver)',
+				'(:api.url)',
+				'(:url)',
+				'(:start)',
+			),
+			array(
+				'directly',
+				'',
+				'admin',
+				'',
+			),
+			$layla_config
+		);
+
+		// Save the changes
+		File::put($layla_config_file, $layla_config);
+
+
+		// Path to DB config file
+		$database_config_file = path('app').DS.'config'.DS.'database'.EXT;
+
+		// Get contents of DB config file
+		$database_config = File::get($database_config_file);
+		
+		// Apply the changes
+		$database_config = str_replace(
+			array(
+				'(:database_connection)',
+				'(:database_user)',
+				'(:database_password)',
+				'(:database_name)',
+			),
+			array(
+				Input::get('database_connection'),
+				Input::get('database_user'),
+				Input::get('database_password'),
+				Input::get('database_name'),
+			),
+			$database_config
+		);
+
+		// Save the changes
+		File::put($database_config_file, $database_config);
+
+		// TODO: Add user via API
+
+		return Redirect::to('/');
+	});
+}
+else
+{
+	Route::get('/', function()
+	{
+		return View::make('layouts.default')->with('meta_title', 'A sexy CMS that knows what it wants')->nest('content', 'home.index');
+	});
+}
 
 /*
 |--------------------------------------------------------------------------

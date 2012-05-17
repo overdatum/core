@@ -42,7 +42,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => '(:database_connection)',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,16 +63,16 @@ return array(
 
 		'sqlite' => array(
 			'driver'   => 'sqlite',
-			'database' => 'application',
+			'database' => '(:database_name)',
 			'prefix'   => '',
 		),
 
 		'mysql' => array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
+			'database' => '(:database_name)',
+			'username' => '(:database_user)',
+			'password' => '(:database_password)',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
@@ -80,9 +80,9 @@ return array(
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
+			'database' => '(:database_name)',
+			'username' => '(:database_user)',
+			'password' => '(:database_password)',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
@@ -90,9 +90,9 @@ return array(
 		'sqlsrv' => array(
 			'driver'   => 'sqlsrv',
 			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
+			'database' => '(:database_name)',
+			'username' => '(:database_user)',
+			'password' => '(:database_password)',
 			'prefix'   => '',
 		),
 

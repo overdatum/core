@@ -2,6 +2,8 @@
 # More info at https://github.com/guard/guard#readme
 
 guard 'livereload' do
+
+  watch(%r{application/(.*)})
   watch(%r{bundles/(.*)})
 #  watch(%r{app/views/.+\.(erb|haml|slim)})
 #  watch(%r{app/helpers/.+\.rb})

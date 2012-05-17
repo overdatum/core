@@ -6,19 +6,16 @@ return array(
 	|--------------------------------------------------------------------------
 	| API Settings
 	|--------------------------------------------------------------------------
-	| The following API drivers are available: "directly", "json"
+	| Layla will configure this file for you, just visit your homepage
 	*/
 
 	'api' => array(
-		'driver' => 'json',
-		'url' => 'http://api.getlayla.com'
+		'driver' => '(:api.driver)',
+		'url' => '(:api.url)'
 	),
 
-	'url' => 'manage',
+	'url' => '(:url)',
 
-	'start' => array(
-		'domain',
-		'admin'
-	)
+	'start' => array('(:start)')
 
 );
