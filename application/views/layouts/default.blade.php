@@ -6,7 +6,7 @@
 	<title>Layla - {{ $meta_title }}</title>
 	<meta name="viewport" content="width=device-width">
 	{{ HTML::script('js/jquery.min.js') }}
-	{{ HTML::style('css/bootstrap.min.css') }}
+	{{ HTML::style('css/bootstrap.css') }}
 	{{ HTML::style('css/bootstrap-responsive.min.css') }}
 	<style>
 		.center-content {
@@ -15,6 +15,6 @@
 	</style>
 </head>
 <body>
-{{ $content }}
+	{{ $content }}
 </body>
 </html>
