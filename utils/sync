@@ -12,5 +12,5 @@ else
 		ssh layla-transip "cd $(printf %q "$layla_path")/utils && ./refreshdb $1"
 	else
 	    echo "You cannot execute sync outside of the utils directory"
-	fi	
+	fi
 fi
