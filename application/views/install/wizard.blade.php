@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="span12">
 			<div class="page-header">
-				<h1><?= __('layla.install.title') ?></h1>
+				<h1><?php echo __('layla.install.title') ?></h1>
 			</div>
 			{{ Form::open('', 'POST', array('class' => 'form-horizontal')) }}
 

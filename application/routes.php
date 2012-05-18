@@ -43,7 +43,7 @@ if(Config::get('layla.url') == '(:url)')
 	Route::post('(.*)', function()
 	{
 		// Path to Layla config
-		$layla_config_file = path('app').DS.'config'.DS.'layla'.EXT;
+		$layla_config_file = path('app').'config'.DS.'layla'.EXT;
 
 		// Get contents of DB config file
 		$layla_config = File::get($layla_config_file);
@@ -60,7 +60,7 @@ if(Config::get('layla.url') == '(:url)')
 				'directly',
 				'',
 				'manage',
-				"domain', 'admin",
+				"admin', 'domain",
 			),
 			$layla_config
 		);
@@ -96,6 +96,7 @@ if(Config::get('layla.url') == '(:url)')
 		File::put($database_config_file, $database_config);
 
 		// TODO: Add user via API
+		// TODO: Install bundles
 
 		return Redirect::to('/');
 	});
