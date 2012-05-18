@@ -64,11 +64,13 @@ if(Config::get('layla.url') == '(:url)')
 			}
 		}
 
-		if($writable)
+		if($writable && ! is_dir(path('bundle').'components'))
 		{
 			ob_start();
 				Command::run(array('bundle:install', 'components'));
 			ob_end_clean();
+			
+			return Redirect::to('/');
 		}
 
 		Bundle::start('layla_thirdparty_bootsparks');
