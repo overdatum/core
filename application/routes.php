@@ -40,8 +40,6 @@ if(Config::get('layla.url') == '(:url)')
 
 	Route::get('(.*)', function()
 	{
-		Bundle::start('layla_thirdparty_bootsparks');
-
 		$check_paths = array(
 			path('bundle'),
 			path('app').'config'.DS.'layla'.EXT,
@@ -72,6 +70,8 @@ if(Config::get('layla.url') == '(:url)')
 				Command::run(array('bundle:install', 'components'));
 			ob_end_clean();
 		}
+
+		Bundle::start('layla_thirdparty_bootsparks');
 
 		return View::make('layouts.default')->with('meta_title', 'Install wizard')
 											->nest('content', 'install.wizard', array(
