@@ -5,6 +5,7 @@ return array(
 	'install' => array(
 		'title' => 'Layla install wizard',
 		'sections' => array(
+			'unwritable_paths_found' => 'Unwritable files / folders were found!',
 			'account' => 'Admin account',
 			'database' => 'Database configuration'
 		),

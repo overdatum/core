@@ -32,12 +32,40 @@
 |
 */
 
-if(Config::get('layla.url') == '(:url)')
+if(Config::get('layla.url') !== '(:url)')
 {
 	Route::get('(.*)', function()
 	{
 		Bundle::start('layla_thirdparty_bootsparks');
-		return View::make('layouts.default')->with('meta_title', 'Install wizard')->nest('content', 'install.wizard');
+
+		$check_paths = array(
+			path('app').'config'.DS.'layla'.EXT,
+			path('app').'config'.DS.'database'.EXT,
+			path('storage').'caffche',
+			path('storage').'database',
+			path('storage').'logs',
+			path('storage').'sessions',
+			path('storage').'views',
+		);
+
+		$writable = true;
+		$paths = array();
+		foreach ($check_paths as $path)
+		{
+			$is_writable = is_writable($path);
+			$paths[$path] = $is_writable;
+
+			if( ! $is_writable)
+			{
+				$writable = false;
+			}
+		}
+
+		return View::make('layouts.default')->with('meta_title', 'Install wizard')
+											->nest('content', 'install.wizard', array(
+													'writable' => $writable,
+													'paths' => $paths
+												));
 	});
 
 	Route::post('(.*)', function()
