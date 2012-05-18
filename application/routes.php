@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\CLI\Command;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -70,6 +72,13 @@ if(Config::get('layla.url') == '(:url)')
 
 	Route::post('(.*)', function()
 	{
+		require path('sys').'cli/dependencies'.EXT;
+
+		Command::run(array('bundle', 'install', 'domain'));
+		Command::run(array('bundle', 'install', 'admin'));
+		Command::run(array('bundle', 'install', 'client'));
+		Command::run(array('bundle', 'install', 'components'));
+
 		// Path to Layla config
 		$layla_config_file = path('app').'config'.DS.'layla'.EXT;
 

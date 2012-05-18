@@ -7,7 +7,7 @@ class Repository {
 	 *
 	 * @var string
 	 */
-	protected $api = 'http://bundles.laravel.com/api/';
+	protected $api = 'http://bundles.getlayla.com/api/';
 
 	/**
 	 * Get the decoded JSON information for a bundle.
