@@ -36,11 +36,14 @@ use Laravel\CLI\Command;
 
 if(Config::get('layla.url') == '(:url)')
 {
+	require path('sys').'cli/dependencies'.EXT;
+
 	Route::get('(.*)', function()
 	{
 		Bundle::start('layla_thirdparty_bootsparks');
 
 		$check_paths = array(
+			path('bundle'),
 			path('app').'config'.DS.'layla'.EXT,
 			path('app').'config'.DS.'database'.EXT,
 			path('storage').'cache',
@@ -63,6 +66,13 @@ if(Config::get('layla.url') == '(:url)')
 			}
 		}
 
+		if($writable)
+		{
+			ob_start();
+				Command::run(array('bundle:install', 'components'));
+			ob_end_clean();
+		}
+
 		return View::make('layouts.default')->with('meta_title', 'Install wizard')
 											->nest('content', 'install.wizard', array(
 													'writable' => $writable,
@@ -72,12 +82,11 @@ if(Config::get('layla.url') == '(:url)')
 
 	Route::post('(.*)', function()
 	{
-		require path('sys').'cli/dependencies'.EXT;
-
-		Command::run(array('bundle', 'install', 'domain'));
-		Command::run(array('bundle', 'install', 'admin'));
-		Command::run(array('bundle', 'install', 'client'));
-		Command::run(array('bundle', 'install', 'components'));
+		ob_start();
+			Command::run(array('bundle:install', 'domain'));
+			Command::run(array('bundle:install', 'admin'));
+			Command::run(array('bundle:install', 'client'));
+		ob_end_clean();
 
 		// Path to Layla config
 		$layla_config_file = path('app').'config'.DS.'layla'.EXT;
