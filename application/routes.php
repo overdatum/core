@@ -32,7 +32,7 @@
 |
 */
 
-if(Config::get('layla.url') !== '(:url)')
+if(Config::get('layla.url') == '(:url)')
 {
 	Route::get('(.*)', function()
 	{
@@ -41,7 +41,7 @@ if(Config::get('layla.url') !== '(:url)')
 		$check_paths = array(
 			path('app').'config'.DS.'layla'.EXT,
 			path('app').'config'.DS.'database'.EXT,
-			path('storage').'caffche',
+			path('storage').'cache',
 			path('storage').'database',
 			path('storage').'logs',
 			path('storage').'sessions',
