@@ -3,6 +3,14 @@
 github_username="$1"
 github_password="$2"
 base_path="$3/"
+
+echo "Please enter your github username"
+read github_username
+echo "Please enter your github password"
+read github_password
+echo "Please enter the path where Layla should be installed without /layla (example: /var/www/)"
+read -e base_path
+
 install_path="$base_path/layla/"
 
 login=$(curl -u "$github_username:$github_password" "https://api.github.com/users/$github_username" | python -c 'import json,sys;obj=json.loads(sys.stdin.read());print obj["'"login"'"]')
@@ -17,7 +25,6 @@ echo "Forking layla/components"
 curl -u "$login:$github_password" -X POST https://api.github.com/repos/layla/components/forks > /dev/null 2>&1
 echo "Forking layla/domain"
 curl -u "$login:$github_password" -X POST https://api.github.com/repos/layla/domain/forks > /dev/null 2>&1
-
 
 cd $base_path
 
