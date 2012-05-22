@@ -1,0 +1,46 @@
+body
+{
+	background-color: #efefef;
+}
+
+/* Main holder */
+#holder
+{
+position: relative;
+width:90%;
+padding:1%;
+background-color: white;
+}
+
+/* Navigation */
+nav
+{
+	width:15%;
+	float:left;
+}
+
+/* Search input */
+
+#search .btn
+{
+	margin: 0 0 9px 0;
+}
+
+
+/* Main content */
+#content
+{
+	width:85%;
+	float:left;
+}
+
+td
+{
+	/* Overwriting default settings, need to fix this */
+	vertical-align: middle !important;
+}
+
+#content h2
+{
+font-size:110%;
+}
