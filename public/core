@@ -1,13 +1,7 @@
 #!/bin/bash
 
-github_username="$1"
-github_password="$2"
 base_path="$3/"
 
-echo "Please enter your github username"
-read github_username
-echo "Please enter your github password"
-read github_password
 echo "Please enter the path where Layla should be installed without /layla (example: /var/www/)"
 read -e base_path
 
