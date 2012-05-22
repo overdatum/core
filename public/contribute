@@ -39,15 +39,26 @@ git remote add upstream git@github.com:layla/core.git
 cd "$install_path/bundles"
 
 echo "Cloning & Adding upsteam remote to the admin repository..."
-git clone "git@github.com:$(printf %q "$login")/admin.git" admin  > /dev/null 2>&1 && cd client && git remote add upstream git@github.com:layla/admin.git && cd ..
+git clone "git@github.com:$(printf %q "$login")/admin.git" admin  > /dev/null 2>&1
+cd admin
+git remote add upstream git@github.com:layla/admin.git
+cd ..
 
 echo "Cloning & Adding upsteam remote to the client repository..."
-git clone "git@github.com:$(printf %q "$login")/client.git" client  > /dev/null 2>&1 && cd client && git remote add upstream git@github.com:layla/client.git && cd ..
+git clone "git@github.com:$(printf %q "$login")/client.git" client  > /dev/null 2>&1
+cd client
+git remote add upstream git@github.com:layla/client.git
+cd ..
 
 echo "Cloning & Adding upsteam remote to the components repository..."
-git clone "git@github.com:$(printf %q "$login")/components.git" components > /dev/null 2>&1 &&  && cd components && git remote add upstream git@github.com:layla/components.git && cd ..
+git clone "git@github.com:$(printf %q "$login")/components.git" components > /dev/null 2>&1
+cd components
+git remote add upstream git@github.com:layla/components.git
+cd ..
 
 echo "Cloning & Adding upsteam remote to the domain repository..."
-git clone "git@github.com:$(printf %q "$login")/domain.git" domain  > /dev/null 2>&1 && cd domain && git remote add upstream git@github.com:layla/domain.git && cd ..
+git clone "git@github.com:$(printf %q "$login")/domain.git" domain  > /dev/null 2>&1
+cd domain
+git remote add upstream git@github.com:layla/domain.git
 
 echo "Done!"
