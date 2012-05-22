@@ -134,7 +134,7 @@ if(Config::get('layla.start.0') == '(:start)')
 			),
 			array(
 				Input::get('database_connection'),
-				Input::get('databaseu_ser'),
+				Input::get('database_user'),
 				Input::get('database_password'),
 				Input::get('database_name'),
 			),
@@ -143,6 +143,8 @@ if(Config::get('layla.start.0') == '(:start)')
 
 		// Save the changes
 		File::put(path('app').DS.'config'.DS.'database'.EXT, $database_config);
+
+		DB::query();
 
 		ob_start();
 			if(Input::get('start_api') == '1')
