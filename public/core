@@ -1,0 +1,35 @@
+#!/bin/bash
+
+github_username="$1"
+github_password="$2"
+base_path="$3/"
+
+echo "Please enter your github username"
+read github_username
+echo "Please enter your github password"
+read github_password
+echo "Please enter the path where Layla should be installed without /layla (example: /var/www/)"
+read -e base_path
+
+install_path="$base_path/layla/"
+
+cd $base_path
+
+echo "Cloning layla/core"
+git clone git@github.com:layla/core.git layla  > /dev/null 2>&1
+
+cd "$install_path/bundles"
+
+echo "Cloning the admin repository..."
+git clone git@github.com:layla/admin.git admin  > /dev/null 2>&1
+
+echo "Cloning the client repository..."
+git clone git@github.com:layla/client.git client  > /dev/null 2>&1
+
+echo "Cloning the components repository..."
+git clone git@github.com:layla/components.git components > /dev/null 2>&1
+
+echo "Cloning the domain repository..."
+git clone git@github.com:layla/domain.git domain > /dev/null 2>&1
+
+echo "Done!"
