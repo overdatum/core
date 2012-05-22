@@ -1,3 +1,7 @@
 utils/.passfile
 .DS_Store
 .gitmodules
+bundles/admin
+bundles/client
+bundles/components
+bundles/domain
