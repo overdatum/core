@@ -34,7 +34,7 @@ use Laravel\CLI\Command;
 |
 */
 
-if(Config::get('layla.url') == '(:url)')
+if(Config::get('layla.start.0') == '(:start)')
 {
 	require path('sys').'cli/dependencies'.EXT;
 
@@ -85,9 +85,12 @@ if(Config::get('layla.url') == '(:url)')
 	Route::post('(.*)', function()
 	{
 		ob_start();
-			Command::run(array('bundle:install', 'domain'));
-			Command::run(array('bundle:install', 'admin'));
-			Command::run(array('bundle:install', 'client'));
+			if(Input::get('start_api') == '1')
+				Command::run(array('bundle:install', 'domain'));
+			if(Input::get('start_admin') == '1')
+				Command::run(array('bundle:install', 'admin'));
+			if(Input::get('start_client') == '1')
+				Command::run(array('bundle:install', 'client'));
 		ob_end_clean();
 
 		// Path to Layla config
@@ -143,8 +146,15 @@ if(Config::get('layla.url') == '(:url)')
 		// Save the changes
 		File::put($database_config_file, $database_config);
 
+		ob_start();
+			if(Input::get('start_api') == '1')
+			{
+				Command::run(array('migrate:install'));
+				Command::run(array('migrate'));
+			}
+		ob_end_clean();
+		
 		// TODO: Add user via API
-		// TODO: Install bundles
 
 		return Redirect::to('/');
 	});
