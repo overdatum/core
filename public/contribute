@@ -31,39 +31,23 @@ cd $base_path
 echo "Cloning $(printf %q "$login")/core"
 git clone "git@github.com:$(printf %q "$login")/core.git" layla  > /dev/null 2>&1
 
-echo "Setting up .gitmodules"
-cat > "$install_path.gitmodules" <<EOL
-[submodule "bundles/client"]
-	path = bundles/client
-	url = git@github.com:${login}/client.git
-[submodule "bundles/admin"]
-	path = bundles/admin
-	url = git@github.com:${login}/admin.git
-[submodule "bundles/domain"]
-	path = bundles/domain
-	url = git@github.com:${login}/domain.git
-[submodule "bundles/components"]
-	path = bundles/components
-	url = git@github.com:${login}/components.git 
-EOL
-
 cd $install_path
 
 echo "Adding upsteam remote to the core repository"
 git remote add upstream git@github.com:layla/core.git
 
-echo "Initializing submodules..."
-git submodule init > /dev/null 2>&1
-echo "Updating submodules..."
-git submodule update > /dev/null 2>&1
+cd "$install_path/bundles"
 
-echo "Adding upsteam remote to the admin repository..."
-cd "$install_path/bundles/admin" && git remote add upstream git@github.com:layla/admin.git
-echo "Adding upsteam remote to the client repository..."
-cd "$install_path/bundles/client" && git remote add upstream git@github.com:layla/client.git
-echo "Adding upsteam remote to the components repository..."
-cd "$install_path/bundles/components" && git remote add upstream git@github.com:layla/components.git
-echo "Adding upsteam remote to the domain repository..."
-cd "$install_path/bundles/domain" && git remote add upstream git@github.com:layla/domain.git
+echo "Cloning & Adding upsteam remote to the admin repository..."
+git clone "git@github.com:$(printf %q "$login")/admin.git" admin  > /dev/null 2>&1 && cd client && git remote add upstream git@github.com:layla/admin.git && cd ..
+
+echo "Cloning & Adding upsteam remote to the client repository..."
+git clone "git@github.com:$(printf %q "$login")/client.git" client  > /dev/null 2>&1 && cd client && git remote add upstream git@github.com:layla/client.git && cd ..
+
+echo "Cloning & Adding upsteam remote to the components repository..."
+git clone "git@github.com:$(printf %q "$login")/components.git" components > /dev/null 2>&1 &&  && cd components && git remote add upstream git@github.com:layla/components.git && cd ..
+
+echo "Cloning & Adding upsteam remote to the domain repository..."
+git clone "git@github.com:$(printf %q "$login")/domain.git" domain  > /dev/null 2>&1 && cd domain && git remote add upstream git@github.com:layla/domain.git && cd ..
 
 echo "Done!"
