@@ -40,6 +40,11 @@ if(Config::get('layla.start.0') == '(:start)')
 
 	Route::get('(.*)', function()
 	{
+		return Redirect::to('install');
+	});
+
+	Route::get('install', function()
+	{
 		$check_paths = array(
 			path('bundle'),
 			path('app').'config'.DS.'layla'.EXT,
@@ -82,7 +87,7 @@ if(Config::get('layla.start.0') == '(:start)')
 												));
 	});
 
-	Route::post('(.*)', function()
+	Route::post('install', function()
 	{
 		ob_start();
 			if(Input::get('start_api') == '1')
@@ -93,11 +98,8 @@ if(Config::get('layla.start.0') == '(:start)')
 				Command::run(array('bundle:install', 'client'));
 		ob_end_clean();
 
-		// Path to Layla config
-		$layla_config_file = path('app').'config'.DS.'layla'.EXT;
-
 		// Get contents of DB config file
-		$layla_config = File::get($layla_config_file);
+		$layla_config = File::get(path('app').'config'.DS.'layla.stub'.EXT);
 
 		// Apply the changes
 		$layla_config = str_replace(
@@ -117,14 +119,10 @@ if(Config::get('layla.start.0') == '(:start)')
 		);
 
 		// Save the changes
-		File::put($layla_config_file, $layla_config);
-
-
-		// Path to DB config file
-		$database_config_file = path('app').DS.'config'.DS.'database'.EXT;
+		File::put(path('app').'config'.DS.'layla'.EXT, $layla_config);
 
 		// Get contents of DB config file
-		$database_config = File::get($database_config_file);
+		$database_config = File::get(path('app').DS.'config'.DS.'database.stub'.EXT);
 		
 		// Apply the changes
 		$database_config = str_replace(
@@ -136,7 +134,7 @@ if(Config::get('layla.start.0') == '(:start)')
 			),
 			array(
 				Input::get('database_connection'),
-				Input::get('database_user'),
+				Input::get('databaseu_ser'),
 				Input::get('database_password'),
 				Input::get('database_name'),
 			),
@@ -144,7 +142,7 @@ if(Config::get('layla.start.0') == '(:start)')
 		);
 
 		// Save the changes
-		File::put($database_config_file, $database_config);
+		File::put(path('app').DS.'config'.DS.'database'.EXT, $database_config);
 
 		ob_start();
 			if(Input::get('start_api') == '1')
