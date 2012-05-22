@@ -42,7 +42,7 @@ return array(
 	|
 	*/
 
-	'default' => '(:database_connection)',
+	'default' => 'pgsql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,16 +63,16 @@ return array(
 
 		'sqlite' => array(
 			'driver'   => 'sqlite',
-			'database' => '(:database_name)',
+			'database' => 'layla',
 			'prefix'   => '',
 		),
 
 		'mysql' => array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
-			'database' => '(:database_name)',
-			'username' => '(:database_user)',
-			'password' => '(:database_password)',
+			'database' => 'layla',
+			'username' => 'root',
+			'password' => 'vagrant',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
@@ -80,9 +80,9 @@ return array(
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
-			'database' => '(:database_name)',
-			'username' => '(:database_user)',
-			'password' => '(:database_password)',
+			'database' => 'layla',
+			'username' => 'root',
+			'password' => 'vagrant',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
@@ -90,9 +90,9 @@ return array(
 		'sqlsrv' => array(
 			'driver'   => 'sqlsrv',
 			'host'     => 'localhost',
-			'database' => '(:database_name)',
-			'username' => '(:database_user)',
-			'password' => '(:database_password)',
+			'database' => 'layla',
+			'username' => 'root',
+			'password' => 'vagrant',
 			'prefix'   => '',
 		),
 

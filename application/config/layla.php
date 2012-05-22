@@ -9,20 +9,20 @@ return array(
 	| Layla will configure this file for you, just visit your homepage
 	*/
 
-	'start' => array('(:start)'),
+	'start' => array('admin', 'domain', 'client'),
 
 	'admin' => array(
-		'url_prefix' => '(:admin.url_prefix)',
+		'url_prefix' => 'manage',
 		'api' => array(
-			'url' => '(:admin.api.url)',
-			'driver' => '(:admin.api.driver)'
+			'url' => '',
+			'driver' => 'directly'
 		)
 	),
 
 	'client' => array(
 		'api' => array(
-			'url' => '(:client.api.url)',
-			'driver' => '(:client.api.driver)'
+			'url' => '',
+			'driver' => 'directly'
 		)
 	),
 

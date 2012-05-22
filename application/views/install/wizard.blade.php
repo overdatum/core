@@ -16,7 +16,7 @@
 					@endif
 				@endforeach
 			@else
-				{{ Form::open('', 'POST', array('class' => 'form-horizontal')) }}
+				{{ Form::open('install', 'POST', array('class' => 'form-horizontal')) }}
 					<div class="control-group">
 						<div class="controls">
 							<h3>{{ __('layla.install.sections.general') }}</h3>

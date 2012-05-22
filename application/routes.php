@@ -34,7 +34,16 @@ use Laravel\CLI\Command;
 |
 */
 
-if(Config::get('layla.start.0') == '(:start)')
+$connection = true;
+try {
+	DB::query('SELECT * FROM laravel_migrations');
+}
+catch (Exception $e)
+{
+	$connection = false;
+}
+
+if( ! $connection || Config::get('layla.start.0') == '(:start)')
 {
 	require path('sys').'cli/dependencies'.EXT;
 
@@ -45,6 +54,9 @@ if(Config::get('layla.start.0') == '(:start)')
 
 	Route::get('install', function()
 	{
+		Asset::container('footer')->add('wizard_js', 'js/install/wizard.js');
+		Asset::container('header')->add('wizard_css', 'css/install/wizard.css');
+		
 		$check_paths = array(
 			path('bundle'),
 			path('app').'config'.DS.'layla'.EXT,
@@ -104,16 +116,20 @@ if(Config::get('layla.start.0') == '(:start)')
 		// Apply the changes
 		$layla_config = str_replace(
 			array(
-				'(:api.driver)',
-				'(:api.url)',
-				'(:url)',
+				'(:admin.url_prefix)',
+				'(:admin.api.url)',
+				'(:admin.api.driver)',
+				'(:client.api.url)',
+				'(:client.api.driver)',
 				'(:start)',
 			),
 			array(
-				'directly',
-				'',
-				'manage',
-				implode("', '", array('admin', 'domain'))
+				Input::get('url'),
+				Input::get('admin_api_url'),
+				Input::has('admin_api') ? 'json' : 'directly',
+				Input::get('client_api_url'),
+				Input::has('client_api') ? 'json' : 'directly',
+				implode("', '", array('admin', 'domain', 'client'))
 			),
 			$layla_config
 		);
@@ -143,8 +159,6 @@ if(Config::get('layla.start.0') == '(:start)')
 
 		// Save the changes
 		File::put(path('app').DS.'config'.DS.'database'.EXT, $database_config);
-
-		DB::query();
 
 		ob_start();
 			if(Input::get('start_api') == '1')

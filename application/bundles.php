@@ -48,6 +48,10 @@ return array(
 		'location' => 'admin'
 	),
 
+	'layla_client' => array(
+		'location' => 'client'
+	),
+
 	'layla_thirdparty_dbmanager' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'dbmanager'

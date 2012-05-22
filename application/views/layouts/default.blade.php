@@ -8,6 +8,8 @@
 	{{ HTML::script('js/jquery.min.js') }}
 	{{ HTML::style('css/bootstrap.css') }}
 	{{ HTML::style('css/bootstrap-responsive.min.css') }}
+	{{ Asset::container('header')->scripts() }}
+	{{ Asset::container('header')->styles() }}
 	<style>
 		.center-content {
 			text-align: center;
@@ -16,5 +18,6 @@
 </head>
 <body>
 	{{ $content }}
+	{{ Asset::container('footer')->scripts() }}
 </body>
 </html>
