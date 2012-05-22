@@ -1,12 +1,12 @@
 [submodule "bundles/client"]
 	path = bundles/client
-	url = git@github.com:layla/client.git
+	url = git@github.com:Nickstr/client.git
 [submodule "bundles/admin"]
 	path = bundles/admin
-	url = git@github.com:layla/admin.git
+	url = git@github.com:Nickstr/admin.git
 [submodule "bundles/domain"]
 	path = bundles/domain
-	url = git@github.com:layla/domain.git
+	url = git@github.com:Nickstr/domain.git
 [submodule "bundles/components"]
 	path = bundles/components
-	url = git@github.com:layla/components.git
+	url = git@github.com:Nickstr/components.git 
