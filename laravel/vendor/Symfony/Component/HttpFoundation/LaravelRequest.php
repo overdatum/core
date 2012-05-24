@@ -20,6 +20,14 @@ class LaravelRequest extends Request {
             if (magic_quotes()) $data = array_strip_slashes($data);
             $request->request = new ParameterBag($data);
         }
+        
+        if (0 === strpos($request->server->get('CONTENT_TYPE'), 'application/json')
+            && in_array(strtoupper($request->server->get('REQUEST_METHOD', 'GET')), array('POST', 'PUT', 'DELETE', 'PATCH'))
+        ) {
+            $data = $request->getContent() ? json_decode($request->getContent(), TRUE) : array();
+            if (magic_quotes()) $data = array_strip_slashes($data);
+            $request->request = new ParameterBag($data);
+        } 
 
         return $request;
     }
