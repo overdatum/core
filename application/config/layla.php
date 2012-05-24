@@ -11,18 +11,26 @@ return array(
 
 	'start' => array('admin', 'domain', 'client'),
 
+	'domain' => array(
+		'api' => array(
+			'version' => 1
+		)
+	),
+
 	'admin' => array(
 		'url_prefix' => 'manage',
 		'api' => array(
 			'url' => '',
-			'driver' => 'directly'
+			'driver' => 'directly',
+			'version' => 1
 		)
 	),
 
 	'client' => array(
 		'api' => array(
 			'url' => '',
-			'driver' => 'directly'
+			'driver' => 'directly',
+			'version' => 1
 		)
 	),
 
