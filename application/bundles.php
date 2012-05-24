@@ -67,4 +67,9 @@ return array(
 		'location' => 'components'.DS.'bootsparks'
 	),
 
+	'layla_thirdparty_layla' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'layla'
+	),
+
 );
