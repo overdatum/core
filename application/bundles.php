@@ -72,4 +72,9 @@ return array(
 		'location' => 'components'.DS.'layla'
 	),
 
+	'layla_thirdparty_assetcompressor' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'assetcompressor'
+	)
+
 );
