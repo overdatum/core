@@ -43,7 +43,7 @@ catch (Exception $e)
 	$connection = false;
 }
 
-if( ! $connection || Config::get('layla.start.0') == '(:start)')
+if( ! $connection || ! File::exists(path('app').'config'.DS.'layla'.EXT) || Config::get('layla.start.0') == '(:start)')
 {
 	require path('sys').'cli/dependencies'.EXT;
 
@@ -59,8 +59,7 @@ if( ! $connection || Config::get('layla.start.0') == '(:start)')
 		
 		$check_paths = array(
 			path('bundle'),
-			path('app').'config'.DS.'layla'.EXT,
-			path('app').'config'.DS.'database'.EXT,
+			path('app').'config',
 			path('storage').'cache',
 			path('storage').'database',
 			path('storage').'logs',
