@@ -3,6 +3,9 @@
 		<div class="span12">
 			<div class="page-header">
 				<h1><?php echo __('layla.install.title') ?></h1>
+				<div class="errors">
+					{{ Notification::show() }}
+				</div>
 			</div>
 			@if( ! $writable)
 				<div class="control-group">
