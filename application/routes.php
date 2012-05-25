@@ -101,7 +101,7 @@ if( ! $connection || ! File::exists(path('app').'config'.DS.'layla'.EXT) || Conf
 	Route::post('install', function()
 	{
 		ob_start();
-			if(Input::get('start_api') == '1')
+			if(Input::get('start_domain') == '1')
 				Command::run(array('bundle:install', 'domain'));
 			if(Input::get('start_admin') == '1')
 				Command::run(array('bundle:install', 'admin'));
@@ -160,7 +160,7 @@ if( ! $connection || ! File::exists(path('app').'config'.DS.'layla'.EXT) || Conf
 		File::put(path('app').DS.'config'.DS.'database'.EXT, $database_config);
 
 		ob_start();
-			if(Input::get('start_api') == '1')
+			if(Input::get('start_domain') == '1')
 			{
 				Command::run(array('migrate:install'));
 				Command::run(array('migrate'));
