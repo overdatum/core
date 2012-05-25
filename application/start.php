@@ -180,11 +180,14 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 // --------------------------------------------------------------
 // Start bundles
 // --------------------------------------------------------------
-foreach (Config::get('layla.start') as $bundle_name)
+if(File::exists(path('app').'config'.DS.'layla'.EXT))
 {
-	if($bundle_name == '(:start)') continue;
-	
-	Bundle::start('layla_'.$bundle_name);
+	foreach (Config::get('layla.start') as $bundle_name)
+	{
+		if($bundle_name == '(:start)') continue;
+		
+		Bundle::start('layla_'.$bundle_name);
+	}
 }
 
 // --------------------------------------------------------------
