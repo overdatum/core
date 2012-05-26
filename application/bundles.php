@@ -75,6 +75,11 @@ return array(
 	'layla_thirdparty_assetcompressor' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'assetcompressor'
+	),
+
+	'layla_thirdparty_httpful' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'httpful'
 	)
 
 );
