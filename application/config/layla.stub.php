@@ -22,7 +22,9 @@ return array(
 		'api' => array(
 			'url' => '(:admin.api.url)',
 			'driver' => '(:admin.api.driver)',
-			'version' => 1
+			'version' => 1,
+			'username' => 'user',
+			'password' => 'pass'
 		)
 	),
 
@@ -30,7 +32,9 @@ return array(
 		'api' => array(
 			'url' => '(:client.api.url)',
 			'driver' => '(:client.api.driver)',
-			'version' => 1
+			'version' => 1,
+			'username' => 'user',
+			'password' => 'pass'
 		)
 	),
 
