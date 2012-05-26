@@ -35,6 +35,7 @@
 - [Added `unless` structure to Blade template engine](/docs/views/templating#blade-unless).
 - [Added Blade comments](/docs/views/templating#blade-comments).
 - [Added simpler environment management](/docs/install#environments).
+- Added `Blade::extend()` method to define custom blade compilers.
 - Added `View::exists` method.
 - Use [Memcached](http://php.net/manual/en/book.memcached.php) API instead of older [Memcache](http://php.net/manual/en/book.memcache.php) API.
 - Added support for bundles outside of the bundle directory.
@@ -72,10 +73,16 @@
 - Added Response::eloquent method for creating Eloquent responses.
 - Fixed bug when using many-to-many relationships on non-default database connection.
 - Added true reflection based IoC to container.
+- Added `Request::route()->controller` and `Request::route()->controller_action`.
+- Added `Event::queue`, `Event::flusher`, and `Event::flush` methods to Event class.
+- Added `array_except` and `array_only` helpers, similar to `Input::except` and `Input::only` but for arbitrary arrays.
 
 <a name="upgrade-3.2"></a>
 ## Upgrading From 3.1
 
+- Add new `asset_url` and `profiler` options to application configuration.
+- Replace **auth** configuration file.
+- Upgrade the **paths.php** file.
 - Replace the **laravel** folder.
 
 <a name="3.1.9"></a>

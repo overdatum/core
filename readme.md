@@ -11,8 +11,14 @@ Layla is a project that started when we (Rojtjo and Vespakoen) decided to team u
 
 We have different reasons for building our own CMS, but here are the most important ones.
 
-*	Ease of use ([Cockpit-like interfaces](http://www.youtube.com/watch?v=naUQe_3umhg) is not what clients want)
-*	Ease of development (Flexible, Simple, Modular, Well documented, Fun, Laravel!)
+```php
+<?php
+
+Route::get('/', function()
+{
+	return "Hello World!":
+});
+```
 
 
 ## What?
