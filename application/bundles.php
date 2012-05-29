@@ -40,40 +40,32 @@ return array(
 	),
 
 	
-	'layla_components_layla' => array(
+	'components_layla' => array(
 		'location' => 'components'.DS.'layla'
 	),
 
-	'layla_domain' => array(
-		'location' => 'domain'
-	),
+	'domain',
 
-	'layla_admin' => array(
-		'handles' => 'manage',
-		'location' => 'admin'
-	),
+	'admin',
 
-	'layla_client' => array(
-		'location' => 'client'
-	),
+	'client',
 
-
-	'layla_thirdparty_authority' => array(
+	'thirdparty_authority' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'thirdparty'.DS.'authority'
 	),
 
-	'layla_thirdparty_bootsparks' => array(
+	'thirdparty_bootsparks' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'thirdparty'.DS.'bootsparks'
 	),
 
-	'layla_thirdparty_assetcompressor' => array(
+	'thirdparty_assetcompressor' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'thirdparty'.DS.'assetcompressor'
 	),
 
-	'layla_thirdparty_httpful' => array(
+	'thirdparty_httpful' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'httpful'
 	),

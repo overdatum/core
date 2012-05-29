@@ -89,7 +89,7 @@ if( ! $connection || ! File::exists(path('app').'config'.DS.'layla'.EXT) || Conf
 			return Redirect::to('/');
 		}
 
-		Bundle::start('layla_thirdparty_bootsparks');
+		Bundle::start('thirdparty_bootsparks');
 
 		return View::make('layouts.default')->with('meta_title', 'Install wizard')
 											->nest('content', 'install.wizard', array(

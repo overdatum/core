@@ -176,7 +176,7 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 | Bootstrapping Layla
 |--------------------------------------------------------------------------
 */
-Bundle::start('layla_components_layla');
+Bundle::start('components_layla');
 
 // --------------------------------------------------------------
 // Start bundles
@@ -187,7 +187,12 @@ if(File::exists(path('app').'config'.DS.'layla'.EXT))
 	{
 		if($bundle_name == '(:start)') continue;
 		
-		Bundle::start('layla_'.$bundle_name);
+		if($bundle_name == 'admin')
+		{
+			Bundle::$bundles['admin']['handles'] = Config::get('layla.admin.url_prefix');
+		}
+
+		Bundle::start($bundle_name);
 	}
 }
 
