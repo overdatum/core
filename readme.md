@@ -11,16 +11,6 @@ Layla is a project that started when we (Rojtjo and Vespakoen) decided to team u
 
 We have different reasons for building our own CMS, but here are the most important ones.
 
-```php
-<?php
-
-Route::get('/', function()
-{
-	return "Hello World!":
-});
-```
-
-
 ## What?
 
 We don't have a lot to show off yet so let's get geeky and present to you a rough outline of Layla.
