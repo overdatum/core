@@ -44,12 +44,6 @@ return array(
 		'location' => 'components'.DS.'layla'
 	),
 
-	'domain',
-
-	'admin',
-
-	'client',
-
 	'thirdparty_authority' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'thirdparty'.DS.'authority'
@@ -67,7 +61,18 @@ return array(
 
 	'thirdparty_httpful' => array(
 		'auto' => true,
-		'location' => 'components'.DS.'httpful'
+		'location' => 'components'.DS.'thirdparty'.DS.'httpful'
 	),
+
+	'thirdparty_menu' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'thirdparty'.DS.'menu'
+	),
+
+	'domain',
+
+	'admin',
+
+	'client',
 
 );
