@@ -253,7 +253,10 @@ class Validator {
 		{
 			return false;
 		}
-
+		if(is_array($value) && (count($value) == 0 || (count($value) == 1 && $value[0] == '')))
+		{
+			return false;
+		}
 		return true;
 	}
 
