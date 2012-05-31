@@ -176,7 +176,7 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 | Bootstrapping Layla
 |--------------------------------------------------------------------------
 */
-Bundle::start('components_layla');
+Bundle::start('layla');
 
 // --------------------------------------------------------------
 // Start bundles

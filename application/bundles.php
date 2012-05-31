@@ -38,12 +38,7 @@ return array(
 	'docs' => array(
 		'handles' => 'docs'
 	),
-
 	
-	'components_layla' => array(
-		'location' => 'components'.DS.'layla'
-	),
-
 	'thirdparty_authority' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'thirdparty'.DS.'authority'
@@ -67,6 +62,15 @@ return array(
 	'thirdparty_menu' => array(
 		'auto' => true,
 		'location' => 'components'.DS.'thirdparty'.DS.'menu'
+	),
+
+	'thirdparty_bob' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'thirdparty'.DS.'bob'
+	),
+
+	'layla' => array(
+		'location' => 'components'.DS.'layla'
 	),
 
 	'domain',
