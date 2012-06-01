@@ -12,8 +12,9 @@
 <body onload="prettyPrint()">
 	<div class="wrapper">
 		<header>
-			<h1>Laravel</h1>
-			<h2>A Framework For Web Artisans</h2>
+			<img style="float:right" src="{{ URL::base() }}/img/layla.gif" height="105">
+			<h1>Layla</h1>
+			<h2>A sexy CMS that knows what it wants</h2>
 
 			<p class="intro-text">
 			</p>

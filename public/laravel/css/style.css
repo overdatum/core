@@ -71,9 +71,6 @@ body
 .wrapper>header
 {
 	border-bottom:1px solid #eee;
-	background-image:url(../img/logoback.png);
-	background-repeat:no-repeat;
-	background-position:right;
 	text-shadow:1px 1px 0px #fff;
 	padding-top:2.5em;
 }

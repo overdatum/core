@@ -12,7 +12,7 @@ require_once __DIR__.'/libraries/markdown.php';
  */
 function doc_root()
 {
-	return path('sys').'documentation/';
+	return path('base').'documentation/';
 }
 
 /**
@@ -62,7 +62,7 @@ Route::get('(:bundle)', function()
  * @param  string  $page
  * @return mixed
  */
-Route::get('(:bundle)/(:any)/(:any?)', function($section, $page = null)
+Route::get('(:bundle)/(:any)/(:any)/(:any?)', function($app, $section, $page = null)
 {
 	$file = rtrim(implode('/', func_get_args()), '/');
 
