@@ -44,3 +44,22 @@ td
 {
 font-size:110%;
 }
+
+
+
+
+#search input {
+	margin-right: 10px }
+
+/* Admin Table Styling */
+table td.last {
+	padding-right: 0 }
+
+table td.buttons {
+	text-align: right }
+
+table td.buttons a {
+	margin-left: 10px }
+
+table td.big {
+	font-size: 180%; }
