@@ -42,135 +42,146 @@ catch (Exception $e)
 {
 	$connection = false;
 }
-
-if( ! $connection || ! File::exists(path('app').'config'.DS.'layla'.EXT) || Config::get('layla.start.0') == '(:start)')
+if( ! $connection)
 {
 	require path('sys').'cli/dependencies'.EXT;
 
-	Route::get('(.*)', function()
+	if( ! File::exists(path('app').'config'.DS.'layla'.EXT) || Config::get('layla.start.0') == '(:start)')
 	{
-		return Redirect::to('install');
-	});
-
-	Route::get('install', function()
-	{
-		Asset::container('footer')->add('wizard_js', 'js/install/wizard.js');
-		Asset::container('header')->add('wizard_css', 'css/install/wizard.css');
-		
-		$check_paths = array(
-			path('bundle'),
-			path('app').'config',
-			path('storage').'cache',
-			path('storage').'database',
-			path('storage').'logs',
-			path('storage').'sessions',
-			path('storage').'views',
-		);
-
-		$writable = true;
-		$paths = array();
-		foreach ($check_paths as $path)
+		Route::get('(.*)', function()
 		{
-			$is_writable = is_writable($path);
-			$paths[$path] = $is_writable;
+			return Redirect::to('install');
+		});
 
-			if( ! $is_writable)
+		Route::get('install', function()
+		{
+			Asset::container('footer')->add('wizard_js', 'js/install/wizard.js');
+			Asset::container('header')->add('wizard_css', 'css/install/wizard.css');
+			
+			$check_paths = array(
+				path('bundle'),
+				path('app').'config',
+				path('storage').'cache',
+				path('storage').'database',
+				path('storage').'logs',
+				path('storage').'sessions',
+				path('storage').'views',
+			);
+
+			$writable = true;
+			$paths = array();
+			foreach ($check_paths as $path)
 			{
-				$writable = false;
-			}
-		}
+				$is_writable = is_writable($path);
+				$paths[$path] = $is_writable;
 
-		if($writable && ! is_dir(path('bundle').'components'))
+				if( ! $is_writable)
+				{
+					$writable = false;
+				}
+			}
+
+			if($writable && ! is_dir(path('bundle').'components'))
+			{
+				ob_start();
+					Command::run(array('bundle:install', 'components'));
+				ob_end_clean();
+				
+				return Redirect::to('/');
+			}
+
+			Bundle::start('thirdparty_bootsparks');
+
+			return View::make('layouts.default')->with('meta_title', 'Install wizard')
+												->nest('content', 'install.wizard', array(
+														'writable' => $writable,
+														'paths' => $paths
+													));
+		});
+
+		Route::post('install', function()
 		{
 			ob_start();
-				Command::run(array('bundle:install', 'components'));
+				if(Input::get('start_domain') == '1')
+					Command::run(array('bundle:install', 'domain'));
+				if(Input::get('start_admin') == '1')
+					Command::run(array('bundle:install', 'admin'));
+				if(Input::get('start_client') == '1')
+					Command::run(array('bundle:install', 'client'));
+			ob_end_clean();
+
+			// Get contents of DB config file
+			$layla_config = File::get(path('app').'config'.DS.'layla.stub'.EXT);
+
+			// Apply the changes
+			$layla_config = str_replace(
+				array(
+					'(:admin.url_prefix)',
+					'(:admin.api.url)',
+					'(:admin.api.driver)',
+					'(:client.api.url)',
+					'(:client.api.driver)',
+					'(:start)',
+				),
+				array(
+					Input::get('url'),
+					Input::get('admin_api_url'),
+					Input::has('admin_api') ? 'json' : 'directly',
+					Input::get('client_api_url'),
+					Input::has('client_api') ? 'json' : 'directly',
+					implode("', '", array('admin', 'domain', 'client'))
+				),
+				$layla_config
+			);
+
+			// Save the changes
+			File::put(path('app').'config'.DS.'layla'.EXT, $layla_config);
+
+			// Get contents of DB config file
+			$database_config = File::get(path('app').DS.'config'.DS.'database.stub'.EXT);
+			
+			// Apply the changes
+			$database_config = str_replace(
+				array(
+					'(:database_connection)',
+					'(:database_user)',
+					'(:database_password)',
+					'(:database_name)',
+				),
+				array(
+					Input::get('database_connection'),
+					Input::get('database_user'),
+					Input::get('database_password'),
+					Input::get('database_name'),
+				),
+				$database_config
+			);
+
+			// Save the changes
+			File::put(path('app').DS.'config'.DS.'database'.EXT, $database_config);
+
+			ob_start();
+				if(Input::get('start_domain') == '1')
+				{
+					Command::run(array('migrate:install'));
+					Command::run(array('migrate'));
+				}
 			ob_end_clean();
 			
+			// TODO: Add user via API
+
 			return Redirect::to('/');
-		}
-
-		Bundle::start('thirdparty_bootsparks');
-
-		return View::make('layouts.default')->with('meta_title', 'Install wizard')
-											->nest('content', 'install.wizard', array(
-													'writable' => $writable,
-													'paths' => $paths
-												));
-	});
-
-	Route::post('install', function()
+		});
+	}
+	else
 	{
 		ob_start();
-			if(Input::get('start_domain') == '1')
-				Command::run(array('bundle:install', 'domain'));
-			if(Input::get('start_admin') == '1')
-				Command::run(array('bundle:install', 'admin'));
-			if(Input::get('start_client') == '1')
-				Command::run(array('bundle:install', 'client'));
+			Command::run(array('migrate:install'));
+			Command::run(array('migrate'));
 		ob_end_clean();
-
-		// Get contents of DB config file
-		$layla_config = File::get(path('app').'config'.DS.'layla.stub'.EXT);
-
-		// Apply the changes
-		$layla_config = str_replace(
-			array(
-				'(:admin.url_prefix)',
-				'(:admin.api.url)',
-				'(:admin.api.driver)',
-				'(:client.api.url)',
-				'(:client.api.driver)',
-				'(:start)',
-			),
-			array(
-				Input::get('url'),
-				Input::get('admin_api_url'),
-				Input::has('admin_api') ? 'json' : 'directly',
-				Input::get('client_api_url'),
-				Input::has('client_api') ? 'json' : 'directly',
-				implode("', '", array('admin', 'domain', 'client'))
-			),
-			$layla_config
-		);
-
-		// Save the changes
-		File::put(path('app').'config'.DS.'layla'.EXT, $layla_config);
-
-		// Get contents of DB config file
-		$database_config = File::get(path('app').DS.'config'.DS.'database.stub'.EXT);
-		
-		// Apply the changes
-		$database_config = str_replace(
-			array(
-				'(:database_connection)',
-				'(:database_user)',
-				'(:database_password)',
-				'(:database_name)',
-			),
-			array(
-				Input::get('database_connection'),
-				Input::get('database_user'),
-				Input::get('database_password'),
-				Input::get('database_name'),
-			),
-			$database_config
-		);
-
-		// Save the changes
-		File::put(path('app').DS.'config'.DS.'database'.EXT, $database_config);
-
-		ob_start();
-			if(Input::get('start_domain') == '1')
-			{
-				Command::run(array('migrate:install'));
-				Command::run(array('migrate'));
-			}
-		ob_end_clean();
-		
-		// TODO: Add user via API
 
 		return Redirect::to('/');
-	});
+	}
 }
 else
 {
@@ -179,7 +190,6 @@ else
 		return View::make('layouts.default')->with('meta_title', 'A sexy CMS that knows what it wants')->nest('content', 'home.index');
 	});
 }
-
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
