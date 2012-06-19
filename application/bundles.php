@@ -69,6 +69,12 @@ return array(
 		'location' => 'components'.DS.'thirdparty'.DS.'bob'
 	),
 
+	'thirdparty_mustache' => array(
+		'auto' => true,
+		'location' => 'components'.DS.'thirdparty'.DS.'mustache'
+	),
+
+
 	'layla' => array(
 		'location' => 'components'.DS.'layla'
 	),
