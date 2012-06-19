@@ -83,6 +83,7 @@ return array(
 	),
 
 	'uncountable' => array(
+		'media',
 		'audio',
 		'equipment',
 		'deer',
