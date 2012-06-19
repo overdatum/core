@@ -1,6 +1,17 @@
+@font-face {
+    font-family: 'MuseoSlab500Regular';
+    src: url('/fonts/museo_slab_500-webfont.eot');
+    src: url('/fonts/museo_slab_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/museo_slab_500-webfont.woff') format('woff'),
+         url('/fonts/museo_slab_500-webfont.ttf') format('truetype'),
+         url('fonts/museo_slab_500-webfont.svg#MuseoSlab500Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body
 {
-	background-color: #efefef;
+	background: url(/img/bg.png);
 }
 
 /* Main holder */
@@ -40,14 +51,6 @@ td
 	vertical-align: middle !important;
 }
 
-#content h2
-{
-font-size:110%;
-}
-
-
-
-
 #search input {
 	margin-right: 10px }
 
@@ -63,3 +66,10 @@ table td.buttons a {
 
 table td.big {
 	font-size: 180%; }
+
+#module-actions a {
+	margin-left: 10px; }
+
+h1, h2, h3 {
+	color: #000;
+	font-family: 'MuseoSlab500Regular'; }

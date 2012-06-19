@@ -8,7 +8,7 @@
 		<div class="span12">
 			<h1>A sexy CMS that knows what it wants</h1>
 			<p>
-				Your ideas are welcome! check our <a href="https://trello.com/board/layla-development/4fb2c7f48bea67b80900baa0">Trello</a> &amp; <a href="https://github.com/layla">GitHub</a> page or shoot us a mail @ <a href="mailto:we@getlayla.com">we@getlayla.com</a>
+				Your ideas are welcome! check our <a href="https://trello.com/board/layla-development/4fb2c7f48bea67b80900baa0">Trello</a> &amp; <a href="https://github.com/layla">GitHub</a> page
 			</p>
 			<h3>Feeling ready to contribute? Open your favourite terminal and run</h3>
 			<code>
