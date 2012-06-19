@@ -114,7 +114,7 @@ class IoC {
 		// its nested dependencies recursively until they are each resolved.
 		if ($concrete == $type or $concrete instanceof Closure)
 		{
-			$object = static::build($concrete);
+			$object = static::build($concrete, $parameters);
 		}
 		else
 		{
@@ -128,6 +128,8 @@ class IoC {
 		{
 			static::$singletons[$type] = $object;
 		}
+
+		Event::fire('laravel.resolving', array($type, $object));
 
 		return $object;
 	}
