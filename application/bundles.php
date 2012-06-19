@@ -85,4 +85,16 @@ return array(
 
 	'client',
 
+	'module_blog_domain' => array(
+		'location' => 'modules'.DS.'blog'.DS.'domain'
+	),
+
+	'module_blog_admin' => array(
+		'location' => 'modules'.DS.'blog'.DS.'admin'
+	),
+
+	'module_blog_client' => array(
+		'location' => 'modules'.DS.'blog'.DS.'client'
+	),
+
 );
