@@ -155,6 +155,19 @@ if (Config::get('session.driver') !== '')
 
 /*
 |--------------------------------------------------------------------------
+| And We're Done!
+|--------------------------------------------------------------------------
+|
+| Raise the "done" event so extra output can be attached to the response
+| This allows the adding of debug toolbars, etc. to the view, or may be
+| used to do some kind of logging by the application.
+|
+*/
+
+Event::fire('laravel.done', array($response));
+
+/*
+|--------------------------------------------------------------------------
 | Send The Response To The Browser
 |--------------------------------------------------------------------------
 |
@@ -166,16 +179,3 @@ if (Config::get('session.driver') !== '')
 */
 
 $response->send();
-
-/*
-|--------------------------------------------------------------------------
-| And We're Done!
-|--------------------------------------------------------------------------
-|
-| Raise the "done" event so extra output can be attached to the response
-| This allows the adding of debug toolbars, etc. to the view, or may be
-| used to do some kind of logging by the application.
-|
-*/
-
-Event::fire('laravel.done', array($response));

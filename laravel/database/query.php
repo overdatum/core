@@ -139,7 +139,13 @@ class Query {
 	 */
 	public function select($columns = array('*'))
 	{
-		$this->selects = (array) $columns;
+		if( ! is_array($columns))
+		{
+			$columns = array($columns);
+		}
+
+		$this->selects = $columns;
+		
 		return $this;
 	}
 
@@ -663,6 +669,19 @@ class Query {
 		$this->selects = null;
 
 		return $results;
+	}
+
+	/**
+	 * Get the query that will be executed
+	 *
+	 * @param  array  $columns
+	 * @return array
+	 */
+	public function sql($columns = array('*'))
+	{
+		if (is_null($this->selects)) $this->select($columns);
+
+		return $this->grammar->select($this);
 	}
 
 	/**

@@ -72,6 +72,11 @@ abstract class Grammar {
 			return $value->get();
 		}
 
+		if(is_int($value))
+		{
+			return $value;
+		}
+
 		// If the value being wrapped contains a column alias, we need to
 		// wrap it a little differently as each segment must be wrapped
 		// and not the entire string.
