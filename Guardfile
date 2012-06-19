@@ -5,6 +5,7 @@ guard 'livereload' do
 
   watch(%r{application/(.*)})
   watch(%r{bundles/(.*)})
+  watch(%r{public/(.*)})
   watch(%r{documentation/(.*)})
 #  watch(%r{app/views/.+\.(erb|haml|slim)})
 #  watch(%r{app/helpers/.+\.rb})
