@@ -1,0 +1,215 @@
+html {
+	height: 100%; }
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	background: #ae0000 url(../img/list/bg.png);
+	font-family: "Trebuchet MS"; }
+
+a {
+	text-decoration: none; }
+
+.pull-right {
+	float: right; }
+
+i.icon-list {
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: url(../img/icons/list-view.png) 50% 50% no-repeat;
+}
+
+i.icon-tree {
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: url(../img/icons/tree-view.png) 50% 50% no-repeat;
+}
+
+.list .header {
+	overflow: hidden;
+	height: 50px;
+	padding-top: 50px;
+	background: url(../img/list/line.gif) bottom repeat-x;
+}
+
+.list .header .controls {
+	float: right;
+	padding-right: 10px;
+	width: 350px; }
+
+.list .header .search {
+	float: left;
+	border: none;
+	width: 210px;
+	height: 40px;
+	padding: 0 40px 0 0;
+	margin: 0;
+	background: #fff url(../img/icons/search.png) 216px 50% no-repeat; }
+
+.list .header .tabs {
+	float: left; }
+
+.list .header .tabs a {
+	float: left;
+	display: block;
+	background: #ffffff;
+	width: 40px;
+	height: 40px;
+	margin-left: 10px; }
+
+.list .header .tabs i {
+	width: 40px;
+	height: 40px; }
+
+.list .header .tabs a.tab-active {
+	background: url(../img/list/tabs/active-bg.png); }
+
+.list .items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	color: #fff; }
+
+.list .items a {
+	display: block;
+	height: 60px;
+	padding: 20px;
+	font-size: 21px;
+	background: url(../img/list/line.gif) bottom repeat-x;
+	color: #fff; }
+
+#menu {
+	background: #222; }
+
+	#menu ul {
+		padding: 0;
+		margin: 0;
+		overflow: auto; }
+
+	#menu li {
+		list-style: none;
+		display: inline-block; }
+
+	#menu a {
+		float: left;
+		display: block;
+		width: 100px;
+		height: 20px;
+		padding-top: 80px;
+		color: #3f3f3f;
+		text-align: center;
+		font-size: 11px; }
+
+	#menu .logo {
+		background: url(../img/icons/layla.png) 50% 50% no-repeat; }
+
+	#menu a:hover, #menu a:active, #menu .active a {
+		color: #fff;
+	}
+
+.list-column, .versions-column {
+	background: #ae0000 url(../img/list/bg.png); }
+
+.form-column {
+	background: #fff; }
+
+
+#menu {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 100px; }
+
+#menu ul {
+	height: 100%; }
+
+#menu a {
+	text-transform: uppercase; }
+
+#content,
+.list-column,
+.form-column,
+.versions-column {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+.container {
+	width: 100%; }
+
+#content {
+	left: 100px; }
+
+.list-column {
+	left: 0;
+	z-index: 4; }
+
+.form-column {
+	left: 0;
+	right: 300px;
+	z-index: 3 }
+
+.versions-column {
+	z-index: 2;
+	width: 300px; }
+
+.versions-column .header .controls {
+	position: relative;
+	width: auto; }
+
+.versions-column .header .search {
+	position: absolute;
+	width: auto;
+	left: 10px;
+	right: 10px; }
+
+/*.form-column .container, .versions-column .container {
+	margin-left: 100%; }
+*/
+
+#accounts, #pages {
+	display: none }
+
+.icon-home {
+	background-image: url(../img/icons/menu/100/home.png); }
+
+.icon-home:hover, .active .icon-home {
+	background-image: url(../img/icons/menu/100/home-white.png); }
+
+.icon-pages {
+	background-image: url(../img/icons/menu/100/pages.png); }
+
+.icon-pages:hover, .active .icon-pages {
+	background-image: url(../img/icons/menu/100/pages-active.png); }
+
+.icon-media {
+	background-image: url(../img/icons/menu/100/media.png); }
+
+.icon-media:hover, .active .icon-media {
+	background-image: url(../img/icons/menu/100/media-active.png); }
+
+.icon-accounts {
+	background-image: url(../img/icons/menu/100/accounts.png); }
+
+.icon-accounts:hover, .active .icon-accounts {
+	background-image: url(../img/icons/menu/100/accounts-active.png); }
+
+.icon-settings {
+	background-image: url(../img/icons/menu/100/settings.png); }
+
+.icon-settings:hover, .active .icon-settings {
+	background-image: url(../img/icons/menu/100/settings-active.png); }
+
+.icon-profile {
+	background-image: url(../img/icons/menu/100/profile.png); }
+
+.icon-profile:hover, .active .icon-profile {
+	background-image: url(../img/icons/menu/100/profile-active.png); }
