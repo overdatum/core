@@ -116,6 +116,10 @@ i.icon-tree {
 .form-column {
 	background: #fff; }
 
+.page-header {
+	text-align: center;
+	margin: 0 20px 20px 20px;
+	border-bottom: 2px solid #000; }
 
 #menu {
 	position: absolute;
