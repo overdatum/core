@@ -181,7 +181,7 @@ Bundle::start('layla');
 // --------------------------------------------------------------
 // Start bundles
 // --------------------------------------------------------------
-if(File::exists(path('app').'config'.DS.'layla'.EXT))
+if(File::exists(path('app').'config'.DS.'layla'.EXT) || File::exists(path('app').'config'.DS.'local'.DS.'layla'.EXT))
 {
 	foreach (Config::get('layla.start') as $bundle_name)
 	{

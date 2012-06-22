@@ -6,8 +6,8 @@
 	<title>Layla - {{ $meta_title }}</title>
 	<meta name="viewport" content="width=device-width">
 	{{ HTML::script('js/jquery.min.js') }}
-	{{ HTML::style('css/bootstrap.css') }}
-	{{ HTML::style('css/bootstrap-responsive.min.css') }}
+	{{ HTML::style('bootstrap/css/bootstrap.css') }}
+	{{ HTML::style('bootstrap/css/bootstrap-responsive.min.css') }}
 	{{ HTML::style('css/main.css') }}
 	{{ Asset::container('header')->scripts() }}
 	{{ Asset::container('header')->styles() }}
