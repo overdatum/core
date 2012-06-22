@@ -13,6 +13,7 @@ return array(
 
 	'domain' => array(
 		'api' => array(
+			'prefix' => 'api',
 			'version' => 1
 		)
 	),
