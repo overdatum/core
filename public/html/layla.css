@@ -117,6 +117,7 @@ i.icon-tree {
 	background: #fff; }
 
 .page-header {
+	text-transform: uppercase;
 	text-align: center;
 	margin: 0 20px 20px 20px;
 	border-bottom: 2px solid #000; }
