@@ -12,8 +12,8 @@ return array(
 	'start' => array('(:start)'),
 
 	'domain' => array(
+		'url_prefix' => 'api',
 		'api' => array(
-			'prefix' => 'api',
 			'version' => 1
 		)
 	),
