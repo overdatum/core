@@ -1,0 +1,21 @@
+#!/bin/bash
+
+layla_path="public_html/test"
+
+if [ -f "test" ]
+then
+	rsync -av --delete ../ layla@getlayla.com:"$layla_path"
+	ssh layla@getlayla.com "cd $(printf %q "$layla_path")/utils && ./cleardb $1"
+
+	password=$(< .passfile)
+
+	curl -L -X POST -d '{"url":"manage","account_email":"","account_password":"","start_domain":"1","database_connection":"mysql","database_user":"layla_db","database_password":"'$password'","database_name":"layla_test","start_client":"1","client_api_url":"","start_admin":"1","admin_api_url":""}' --header "Content-Type: application/json" http://test.getlayla.com/install > /dev/null 2>&1
+
+	echo "Installed successfully"
+	
+	cd ..
+	
+	php artisan test
+else
+	echo "You cannot execute test outside of the utils directory"
+fi

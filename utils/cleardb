@@ -1,0 +1,12 @@
+#!/bin/bash
+
+env="test"
+
+db_name="layla_test"
+db_password="$(< ../../demo/utils/.passfile)"
+
+echo "Refreshing database"
+echo "database=$db_name"
+echo "env=$env"
+
+mysql -u layla_db -p$db_password -e "DROP DATABASE $db_name; CREATE DATABASE $db_name;"
