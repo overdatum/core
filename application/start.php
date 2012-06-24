@@ -183,16 +183,19 @@ Bundle::start('layla');
 // --------------------------------------------------------------
 if(File::exists(path('app').'config'.DS.'layla'.EXT) || File::exists(path('app').'config'.DS.'local'.DS.'layla'.EXT))
 {
-	foreach (Config::get('layla.start') as $bundle_name)
+	if( ! is_null(Config::get('layla.start')))
 	{
-		if($bundle_name == '(:start)') continue;
-		
-		if($bundle_name == 'admin')
+		foreach (Config::get('layla.start') as $bundle_name)
 		{
-			Bundle::$bundles['admin']['handles'] = Config::get('layla.admin.url_prefix');
-		}
+			if($bundle_name == '(:start)') continue;
+		
+			if($bundle_name == 'admin')
+			{
+				Bundle::$bundles['admin']['handles'] = Config::get('layla.admin.url_prefix');
+			}
 
-		Bundle::start($bundle_name);
+			Bundle::start($bundle_name);
+		}
 	}
 }
 
