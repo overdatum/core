@@ -11,7 +11,7 @@ read github_password
 echo "Please enter the path where Layla should be installed without /layla (example: /var/www/)"
 read -e base_path
 
-install_path="$base_path/layla/"
+install_path="${base_path}layla/"
 
 login=$(curl -u "$github_username:$github_password" "https://api.github.com/users/$github_username" | python -c 'import json,sys;obj=json.loads(sys.stdin.read());print obj["'"login"'"]')
 
