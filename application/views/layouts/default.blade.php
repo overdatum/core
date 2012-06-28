@@ -21,6 +21,11 @@
 			text-align: center;
 		}
 
+		a, a:hover, a:visited, a:active {
+			color: #AE0000;
+			font-weight: bold;
+		}
+
 		code {
 			margin-top: 20px;
 			line-height: 40px;
@@ -33,6 +38,10 @@
 			border: 2px solid #fff;
 			box-shadow: 0px 0px 15px rgba(0, 0, 0, .4);
 		}
+
+		code a, code a:hover, code a:visited, code a:active {
+			color: #fff;
+			text-decoration: none; }
 	</style>
 </head>
 <body>

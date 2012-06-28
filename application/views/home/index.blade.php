@@ -1,7 +1,7 @@
 <div class="container center-content">
 	<div class="row">
 		<div class="span12">
-			<img src="img/layla.gif" alt="Layla CMS">
+			<img src="img/layla.gif" alt="Layla CMS" width="540">
 		</div>
 	</div>
 	<div class="row">
@@ -12,7 +12,7 @@
 			</p>
 			<h3>Feeling ready to contribute? Open your favourite terminal and run</h3>
 			<code>
-				bash <(curl http://getlayla.com/contribute)
+				bash <(curl <a href="http://getlayla.com/contribute" target="_blank" title="Afraid? Go see the source!">http://getlayla.com/contribute</a>)
 			</code>
 		</div>
 	</div>
