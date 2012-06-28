@@ -2,62 +2,70 @@
 
 github_username="$1"
 github_password="$2"
-base_path="$3/"
+base_path="$3"
 
-echo "Please enter your github username"
+echo "Please enter your github username (case sensitive!!)"
 read github_username
 echo "Please enter your github password"
-read github_password
+read -s github_password
 echo "Please enter the path where Layla should be installed without /layla (example: /var/www/)"
 read -e base_path
 
-install_path="${base_path}layla/"
+response=$(curl --write-out %{http_code} --silent --output /dev/null -u "$github_username:$github_password" "https://api.github.com/users/$github_username")
 
-login=$(curl -u "$github_username:$github_password" "https://api.github.com/users/$github_username" | python -c 'import json,sys;obj=json.loads(sys.stdin.read());print obj["'"login"'"]')
+if [[ $response != 200 ]]
+then
+	echo "There was a problem connecting to github, the response code was $response"
+	exit
+fi
 
 echo "Forking layla/core"
-curl -u "$login:$github_password" -X POST https://api.github.com/repos/layla/core/forks > /dev/null 2>&1
+curl -u "$github_username:$github_password" -X POST https://api.github.com/repos/layla/core/forks > /dev/null 2>&1
 echo "Forking layla/admin"
-curl -u "$login:$github_password" -X POST https://api.github.com/repos/layla/admin/forks > /dev/null 2>&1
+curl -u "$github_username:$github_password" -X POST https://api.github.com/repos/layla/admin/forks > /dev/null 2>&1
 echo "Forking layla/client"
-curl -u "$login:$github_password" -X POST https://api.github.com/repos/layla/client/forks > /dev/null 2>&1
+curl -u "$github_username:$github_password" -X POST https://api.github.com/repos/layla/client/forks > /dev/null 2>&1
 echo "Forking layla/components"
-curl -u "$login:$github_password" -X POST https://api.github.com/repos/layla/components/forks > /dev/null 2>&1
+curl -u "$github_username:$github_password" -X POST https://api.github.com/repos/layla/components/forks > /dev/null 2>&1
 echo "Forking layla/domain"
-curl -u "$login:$github_password" -X POST https://api.github.com/repos/layla/domain/forks > /dev/null 2>&1
+curl -u "$github_username:$github_password" -X POST https://api.github.com/repos/layla/domain/forks > /dev/null 2>&1
 
 cd $base_path
 
-echo "Cloning $(printf %q "$login")/core"
-git clone "git@github.com:$(printf %q "$login")/core.git" layla  > /dev/null 2>&1
+echo "Cloning $(printf %q "$github_username")/core"
+git clone "git@github.com:$(printf %q "$github_username")/core.git" layla  > /dev/null 2>&1
 
-cd $install_path
+cd layla
 
 echo "Adding upsteam remote to the core repository"
 git remote add upstream git@github.com:layla/core.git
 
-cd "$install_path/bundles"
+cd bundles
 
 echo "Cloning & Adding upsteam remote to the admin repository..."
-git clone "git@github.com:$(printf %q "$login")/admin.git" admin  > /dev/null 2>&1
+git clone "git@github.com:$(printf %q "$github_username")/admin.git" admin  > /dev/null 2>&1
+
 cd admin
 git remote add upstream git@github.com:layla/admin.git
 cd ..
 
 echo "Cloning & Adding upsteam remote to the client repository..."
-git clone "git@github.com:$(printf %q "$login")/client.git" client  > /dev/null 2>&1
+git clone "git@github.com:$(printf %q "$github_username")/client.git" client  > /dev/null 2>&1
+
 cd client
 git remote add upstream git@github.com:layla/client.git
 cd ..
 
 echo "Cloning & Adding upsteam remote to the components repository..."
-git clone "git@github.com:$(printf %q "$login")/components.git" components > /dev/null 2>&1
+git clone "git@github.com:$(printf %q "$github_username")/components.git" components > /dev/null 2>&1
+
 cd components
 git remote add upstream git@github.com:layla/components.git
 cd ..
 
 echo "Cloning & Adding upsteam remote to the domain repository..."
-git clone "git@github.com:$(printf %q "$login")/domain.git" domain  > /dev/null 2>&1
+git clone "git@github.com:$(printf %q "$github_username")/domain.git" domain  > /dev/null 2>&1
+
 cd domain
 git remote add upstream git@github.com:layla/domain.git
 
