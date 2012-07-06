@@ -42,6 +42,7 @@ catch (Exception $e)
 {
 	$connection = false;
 }
+
 if( ! $connection)
 {
 	require path('sys').'cli/dependencies'.EXT;
@@ -101,14 +102,17 @@ if( ! $connection)
 
 		Route::post('install', function()
 		{
-			ob_start();
-				if(Input::get('start_domain') == '1')
-					Command::run(array('bundle:install', 'domain'));
-				if(Input::get('start_admin') == '1')
-					Command::run(array('bundle:install', 'admin'));
-				if(Input::get('start_client') == '1')
-					Command::run(array('bundle:install', 'client'));
-			ob_end_clean();
+			if( ! is_dir(path('bundle').'domain') && ! is_dir(path('bundle').'admin') && ! is_dir(path('bundle').'client'))
+			{
+				ob_start();
+					if(Input::get('start_domain') == '1')
+						Command::run(array('bundle:install', 'domain'));
+					if(Input::get('start_admin') == '1')
+						Command::run(array('bundle:install', 'admin'));
+					if(Input::get('start_client') == '1')
+						Command::run(array('bundle:install', 'client'));
+				ob_end_clean();
+			}
 
 			// Get contents of DB config file
 			$layla_config = File::get(path('app').'config'.DS.'layla.stub'.EXT);
