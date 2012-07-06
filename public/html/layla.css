@@ -1,12 +1,23 @@
 html {
 	height: 100%; }
 
+@font-face {
+	font-family: 'SegoeUI';
+	src: url('../fonts/segoeui.eot');
+	src: url('../fonts/segoeui.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/segoeui.woff') format('woff'),
+		 url('../fonts/segoeui.ttf') format('truetype'),
+		 url('../fonts/segoeui.svg#SegoeUI') format('svg');
+	font-weight: lighter;
+	font-style: lighter;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
 	background: #ae0000 url(../img/list/bg.png);
-	font-family: "Trebuchet MS"; }
+	font-family: 'SegoeUI', "Trebuchet MS"; }
 
 a {
 	text-decoration: none; }
@@ -14,14 +25,14 @@ a {
 .pull-right {
 	float: right; }
 
-i.icon-list {
+i.menu-icon-list {
 	display: block;
 	width: 20px;
 	height: 20px;
 	background: url(../img/icons/list-view.png) 50% 50% no-repeat;
 }
 
-i.icon-tree {
+i.menu-icon-tree {
 	display: block;
 	width: 20px;
 	height: 20px;
@@ -73,42 +84,136 @@ i.icon-tree {
 	padding: 0;
 	color: #fff; }
 
-.list .items a {
+.list .items .item {
 	display: block;
 	height: 60px;
 	padding: 20px;
+	background: url(../img/list/line.gif) bottom repeat-x; }
+
+.list .items .item a {
 	font-size: 21px;
-	background: url(../img/list/line.gif) bottom repeat-x;
 	color: #fff; }
+
+.options {
+	cursor: pointer;
+	position: relative;
+	float: right;
+	margin-top: 10px;
+	margin-right: 0px;
+	background: url(../img/icons/options.png) 50% 50% no-repeat #fff;
+	width: 40px;
+	height: 40px }
+
+.options.nojs:hover .flyout {
+	display: block; }
+
+.flyout {
+	display: none;
+	position: absolute;
+	right: 140%;
+	top: 0;
+	background: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .3); }
+
+.flyout .title {
+	margin: 0 10px;
+	padding: 10px 0;
+	color: #a2a2a2;
+	border-bottom: 1px solid #a2a2a2;
+	text-align: center;
+	white-space: nowrap; }
+
+.flyout .title .back {
+	display: inline-block;
+	visibility: hidden;
+	width: 8px;
+	height: 10px;
+	margin-right: 10px;
+	margin-left: 5px;
+	background-image: url(../img/flyout/back.png);
+	background-position: top;
+}
+
+.flyout .title .close {
+	margin-left: 10px;
+	margin-right: 5px;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background-image: url(../img/flyout/close.png);
+	background-position: top;
+}
+
+.flyout .arrow {
+	float: right;
+	background: url(../img/flyout/arrow.png);
+	width: 20px;
+	height: 40px;
+	margin-right: -20px; }
+
+.flyout .flyout-list {
+	padding: 10px 0; }
+
+.flyout ul {
+	padding: 0; 
+	margin: 0; }
+
+.list .items .item .flyout a.hidden {
+	height: 0;
+	overflow: hidden;
+	padding: 0 10px;
+	margin: 0; }
+
+.flyout li {
+	list-style: none; }
+
+.list .items .item .flyout li a {
+	display: block;
+	background: #fff;
+	color: #000;
+	padding: 2px 5px;
+	margin: 0px 10px;
+	font-size: 16px;
+	white-space: nowrap; }
+
+.list .items .item .flyout li a:hover, .list .items .item .flyout li.active a {
+	color: #ffffff;
+	background-color: #cb0b0b;
+	*background-color: #b20000;
+	background-image: -ms-linear-gradient(top, #dc1212, #b20000);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dc1212), to(#b20000));
+	background-image: -webkit-linear-gradient(top, #dc1212, #b20000);
+	background-image: -o-linear-gradient(top, #dc1212, #b20000);
+	background-image: -moz-linear-gradient(top, #dc1212, #b20000);
+	background-image: linear-gradient(top, #dc1212, #b20000);
+	background-repeat: repeat-x;
+	border-color: #b20000 #b20000 #660000;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#dc1212', endColorstr='#b20000', GradientType=0);
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.list .items .item .flyout li i {
+	margin-top: 4px; }
 
 #menu {
 	background: #222; }
 
-	#menu ul {
-		padding: 0;
-		margin: 0;
-		overflow: auto; }
+#menu ul {
+	padding: 0;
+	margin: 0;
+	overflow: auto; }
 
-	#menu li {
-		list-style: none;
-		display: inline-block; }
+#menu li {
+	list-style: none;
+	display: inline-block; }
 
-	#menu a {
-		float: left;
-		display: block;
-		width: 100px;
-		height: 20px;
-		padding-top: 80px;
-		color: #3f3f3f;
-		text-align: center;
-		font-size: 11px; }
+#menu .logo {
+	background: url(../img/icons/layla.png) 50% 50% no-repeat; }
 
-	#menu .logo {
-		background: url(../img/icons/layla.png) 50% 50% no-repeat; }
-
-	#menu a:hover, #menu a:active, #menu .active a {
-		color: #fff;
-	}
+#menu a:hover, #menu a:active, #menu .active a {
+	color: #fff;
+}
 
 .list-column, .versions-column {
 	background: #ae0000 url(../img/list/bg.png); }
@@ -151,7 +256,8 @@ i.icon-tree {
 	width: 100%; }
 
 #content {
-	left: 100px; }
+	left: 100px; 
+	top: 0; }
 
 .list-column {
 	left: 0;
@@ -176,45 +282,123 @@ i.icon-tree {
 	left: 10px;
 	right: 10px; }
 
-/*.form-column .container, .versions-column .container {
-	margin-left: 100%; }
-*/
-
 #accounts, #pages {
 	display: none }
 
-.icon-home {
+
+#menu a {
+	float: left;
+	display: block;
+	width: 100px;
+	height: 20px;
+	padding-top: 80px;
+	color: #3f3f3f;
+	text-align: center;
+	font-size: 11px; }
+
+.menu-icon-home {
 	background-image: url(../img/icons/menu/100/home.png); }
 
-.icon-home:hover, .active .icon-home {
+.menu-icon-home:hover, .active .menu-icon-home {
 	background-image: url(../img/icons/menu/100/home-white.png); }
 
-.icon-pages {
+.menu-icon-pages {
 	background-image: url(../img/icons/menu/100/pages.png); }
 
-.icon-pages:hover, .active .icon-pages {
+.menu-icon-pages:hover, .active .menu-icon-pages {
 	background-image: url(../img/icons/menu/100/pages-active.png); }
 
-.icon-media {
+.menu-icon-media {
 	background-image: url(../img/icons/menu/100/media.png); }
 
-.icon-media:hover, .active .icon-media {
+.menu-icon-media:hover, .active .menu-icon-media {
 	background-image: url(../img/icons/menu/100/media-active.png); }
 
-.icon-accounts {
+.menu-icon-accounts {
 	background-image: url(../img/icons/menu/100/accounts.png); }
 
-.icon-accounts:hover, .active .icon-accounts {
+.menu-icon-accounts:hover, .active .menu-icon-accounts {
 	background-image: url(../img/icons/menu/100/accounts-active.png); }
 
-.icon-settings {
+.menu-icon-settings {
 	background-image: url(../img/icons/menu/100/settings.png); }
 
-.icon-settings:hover, .active .icon-settings {
+.menu-icon-settings:hover, .active .menu-icon-settings {
 	background-image: url(../img/icons/menu/100/settings-active.png); }
 
-.icon-profile {
+.menu-icon-profile {
 	background-image: url(../img/icons/menu/100/profile.png); }
 
-.icon-profile:hover, .active .icon-profile {
+.menu-icon-profile:hover, .active .menu-icon-profile {
 	background-image: url(../img/icons/menu/100/profile-active.png); }
+
+.menu-icon-layouts {
+	background-image: url(../img/icons/menu/100/layouts.png); }
+
+.menu-icon-layouts:hover, .active .menu-icon-layouts {
+	background-image: url(../img/icons/menu/100/layouts-active.png); }
+
+/*
+#content {
+	left: 75px; }
+
+#menu {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 75px; }
+
+#menu a {
+	float: left;
+	display: block;
+	width: 75px;
+	height: 20px;
+	padding-top: 55px;
+	color: #3f3f3f;
+	text-align: center;
+	font-size: 9px;
+	background-position: 50% -5px; }
+
+.menu-icon-home {
+	background-image: url(../img/icons/menu/75/home.png); }
+
+.menu-icon-home:hover, .active .menu-icon-home {
+	background-image: url(../img/icons/menu/75/home-white.png); }
+
+.menu-icon-pages {
+	background-image: url(../img/icons/menu/75/pages.png); }
+
+.menu-icon-pages:hover, .active .menu-icon-pages {
+	background-image: url(../img/icons/menu/75/pages-active.png); }
+
+.menu-icon-media {
+	background-image: url(../img/icons/menu/75/media.png); }
+
+.menu-icon-media:hover, .active .menu-icon-media {
+	background-image: url(../img/icons/menu/75/media-active.png); }
+
+.menu-icon-accounts {
+	background-image: url(../img/icons/menu/75/accounts.png); }
+
+.menu-icon-accounts:hover, .active .menu-icon-accounts {
+	background-image: url(../img/icons/menu/75/accounts-active.png); }
+
+.menu-icon-settings {
+	background-image: url(../img/icons/menu/75/settings.png); }
+
+.menu-icon-settings:hover, .active .menu-icon-settings {
+	background-image: url(../img/icons/menu/75/settings-active.png); }
+
+.menu-icon-profile {
+	background-image: url(../img/icons/menu/75/profile.png); }
+
+.menu-icon-profile:hover, .active .menu-icon-layouts {
+	background-image: url(../img/icons/menu/75/profile-active.png); }
+
+.menu-icon-layouts {
+	background-image: url(../img/icons/menu/75/layouts.png); }
+
+.menu-icon-layouts:hover, .active .menu-icon-layouts {
+	background-image: url(../img/icons/menu/75/layouts-active.png); }
+*/
