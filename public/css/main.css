@@ -17,10 +17,10 @@ body
 /* Main holder */
 #holder
 {
-position: relative;
-width:90%;
-padding:1%;
-background-color: white;
+	position: relative;
+	width:90%;
+	padding:1%;
+	background-color: white;
 }
 
 /* Navigation */
